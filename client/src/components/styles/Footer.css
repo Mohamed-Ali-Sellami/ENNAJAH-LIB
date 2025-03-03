@@ -1,0 +1,22 @@
+footer {
+    background-color: rgb(69, 109, 185);
+    color: white;
+    text-align: center;
+    padding: 20px;
+    bottom: 0;
+    width: 100%;
+    font-family: Arial, sans-serif;
+}
+.footer-links a {
+    color: #ddd;
+    margin: 0 10px;
+    text-decoration: none;
+}
+.footer-links a:hover {
+    color: white;
+}
+.contact-info {
+    margin-top: 10px;
+    font-size: 0.9em;
+    
+}

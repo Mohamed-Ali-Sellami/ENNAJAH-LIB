@@ -1,0 +1,228 @@
+.navbar {
+  background: white;
+  padding: 0;
+  border-bottom: 2px solid whitesmoke;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  padding: 0 20px;
+}
+
+.navbar-logo img {
+  width: 120px; /* Taille du logo ajustée */
+  height: 80px;
+}
+
+.navbar-icons {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 20px; /* Espace entre les icônes */
+}
+
+.navbar-icons i {
+  font-size: 22px;
+  color: #0066cc;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  width: 30px;
+}
+
+
+
+.navbar-icons i:hover {
+  color: #0066cc;
+}
+
+.iconprofil, 
+.iconpanier {
+  text-decoration: none !important; /* Supprime tout soulignement */
+  margin-left: -10px;
+  font-size: 10px; 
+  font-weight: bold; 
+  color: inherit; /* Garde la couleur actuelle */
+  display: inline-block; /* Évite que le texte se comporte comme un bloc */
+}
+
+
+.navbar-bottom {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0066cc;
+  height: 50px;
+  width: 100%;
+}
+
+.liste {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.liste li {
+  margin: 0 15px; /* Espacement entre les liens */
+}
+
+.liste a {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 10px 5px;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.liste a:hover {
+  color: whitesmoke;
+  border-bottom: 2px solid whitesmoke;
+  text-decoration: none;
+ 
+}
+.bars-mobile{
+  display: none;
+  
+  }
+
+
+
+
+/* Mobile Menu Button */
+.mobile-menu-btn11 {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background-color: white;
+  transition: all 0.3s ease-in-out;
+}
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .nav-links {
+      gap: 1rem;
+  }
+  
+  .nav-buttons {
+      gap: 0.5rem;
+  }
+  
+  .btnrg {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.9rem;
+      border-radius: 25px;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  .navbar-bottom {
+    display: none;
+  }
+  .navbar-icons {
+    display: none;
+  }
+
+  .navbar {
+      padding: 1rem;
+  }
+
+  .bars-mobile {
+    display: flex;  /* Assure-toi qu'il est visible */
+    justify-content: flex-end;
+    align-items: center;
+    position: absolute;
+    top: 20px; /* Ajuste selon la hauteur de ta navbar */
+    left: 180px;
+    z-index: 1100;
+   
+  }
+  
+  .mobile-menu-btn11 {
+    display: block;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1100;
+  }
+  
+  .bar {
+    display: block;
+    width: 30px;
+    height: 4px;
+    margin: 5px auto;
+    background-color:  rgb(65, 24, 209); /* Change selon ton design */
+    transition: all 0.3s ease-in-out;
+  }
+
+  .nav-content {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      width: 100%;
+      height: 100vh;
+      background-color:#0066cc;
+      flex-direction: column;
+      padding: 5rem 2rem;
+      transition: 0.3s ease-in-out;
+      margin: 0;
+      box-shadow: -2px 0 4px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+      margin-bottom: 2rem;
+
+  }
+
+  .nav-content.active {
+      right: 0;
+  }
+
+  .nav-links {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      width: 100%;
+      margin-top: 15px;
+      padding: 100px;
+  }
+  .nav-links a {
+      padding: 20px;
+  }
+  .nav-item a {
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+    padding: 25px;
+    width: 100%;
+  }
+
+  .nav-buttons {
+      flex-direction: column;
+      width: 100%;
+      margin-top: 2rem;
+      gap: 1rem;
+      color: white;
+      margin-bottom: 2rem;
+  }
+}

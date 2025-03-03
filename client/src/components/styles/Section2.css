@@ -1,0 +1,163 @@
+.titles2 {
+  font-size: 50px;
+  color:#0066cc;
+  align-items: center;
+  text-align: center;
+  font-weight: bold;
+}
+
+.container3 p {
+  font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    margin-left: 30px;
+}
+/********************************cards****************************/
+.cardbox {
+  width: 100%;
+}
+
+.cards {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap; /* Permet aux cartes de passer à la ligne sur petit écran */
+  min-height: 100vh;
+  margin: 0;
+  background: white;
+  font-family: Arial, sans-serif;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.container3 {
+  background-color: white;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.container3 h1 {
+  font-size: 60px;
+  font-weight: bold;
+  text-align: center;
+  color: rgb(15, 14, 14);
+  padding: 0 15px;
+}
+
+.card {
+  background-color: transparent;
+  border: 2px solid #000;
+  border-radius: 50px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  margin: 20px;
+  padding: 15px;
+  text-align: center;
+  transition: transform 0.3s ease;
+  align-items: center;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card img {
+  width: 100%;
+  height: 150px; /* Hauteur fixe pour toutes les images */
+  object-fit: cover; /* Garde les proportions de l'image */
+  border-radius: 10px;
+}
+
+.card h3 {
+  margin: 15px 0 10px 0;
+  font-size: 1.2em;
+  color: rgb(10, 10, 10);
+}
+
+.card p {
+  font-size: 0.9em;
+  color: #090909;
+  font-weight: bold;
+}
+
+.sold {
+  background: red;
+  color: white;
+  width: 50px;
+  border-radius: 15px 50px;
+  padding: 5px;
+  margin: 0 auto 10px auto;
+}
+
+.button-s3 {
+  background-color: rgb(69, 109, 185);
+  border: 2px solid white;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: 10px;
+}
+
+.button-s3:hover {
+  background-color: rgb(45, 77, 138);
+}
+
+/* Styles responsives */
+@media screen and (max-width: 1200px) {
+  .cards {
+    justify-content: center;
+  }
+  
+  .card {
+    width: calc(33.33% - 40px);
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .container3 h1 {
+    font-size: 40px;
+  }
+  
+  .card {
+    width: calc(50% - 40px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .titles2 {
+    font-size: 30px;
+  }
+  
+  .container3 h1 {
+    font-size: 30px;
+  }
+  
+  .cards {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .card {
+    width: 80%;
+    max-width: 300px;
+    margin: 15px auto;
+  }
+}
+
+/* Style pour la bannière scolaire */
+.cardbox > div:last-child {
+  width: 100%;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.cardbox > div:last-child img {
+  max-width: 100%;
+  height: auto;
+}

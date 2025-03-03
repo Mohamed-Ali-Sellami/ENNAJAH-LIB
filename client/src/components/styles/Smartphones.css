@@ -1,0 +1,104 @@
+.content1 {
+    margin-top: 150px;
+    padding: 20px;
+    width: 100%;
+
+  }
+  
+  /* Style du titre */
+  .content1 h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 40px;
+    font-size: 2.5rem;
+  }
+  
+  /* Container pour les cartes IPTV */
+  .boxphone {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  /* Style des cartes individuelles */
+  .card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  /* Style de l'image dans la carte */
+  .card img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+  }
+  
+  /* Style du titre du produit */
+  .card h3 {
+    color: #333;
+    margin: 10px 0;
+    font-size: 1.2rem;
+  }
+  
+  /* Style du prix */
+  .card .price {
+    color: #ff6b6b;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+  
+  /* Style du bouton d'achat */
+  .card button {
+    background-color: #0099ff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .card button:hover {
+    background-color: #0077cc;
+  }
+  
+  /* Style pour le statut de stock */
+  .stock-status {
+    color: #2ecc71;
+    margin: 10px 0;
+    font-size: 0.9rem;
+  }
+  
+  /* Media Queries pour la responsivité */
+  @media (max-width: 768px) {
+    .boxiptv {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .content1 h1 {
+      font-size: 2rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .boxiptv {
+      grid-template-columns: 1fr;
+    }
+    
+    .content1 {
+      padding: 10px;
+    }
+  }
