@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../JS/userSlice";
+import './styles/Login.css'
 
 const Login = () => {
   const [login, setlogin] = useState({
@@ -44,7 +45,7 @@ const Login = () => {
             Remember me
           </label>
           <button
-            className="btn btn-lg btn-primary btn-block"
+            className="btnlog btnlog-lg btnlog-primary btnlog-block"
             onClick={() => {
               dispatch(userLogin(login));
               setTimeout(() => {
@@ -57,7 +58,7 @@ const Login = () => {
           >
             Login
           </button>
-          u already have account <Link to="/">Register now </Link>
+          u already have account <Link to="/register">Register now </Link>
         </form>
       </div>
     </div>

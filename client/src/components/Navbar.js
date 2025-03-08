@@ -13,8 +13,6 @@ function Navbar({ hideAuthButtons }) {
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
-
-
   const handleLogout = () => {
     dispatch(logout());
     localStorage.removeItem('token');
@@ -28,15 +26,19 @@ function Navbar({ hideAuthButtons }) {
           <div className="navbar-logo">
             <img src={imglogo} alt="Logo" />
           </div>
-         
 
           <div className="navbar-icons">
-          <i className="fa-solid fa-user"> <Link to="/profil" className="iconprofil"> Profil </Link> </i>
-          <i className="fa-solid fa-cart-shopping"> <Link to="/shoppingcard" className="iconpanier"> Panier </Link> </i>
-
+            <i className="fa-solid fa-user">
+              <Link to={user?.isAdmin ? "/dashboard" : "/profil"} className="iconprofil">
+                {isAuth ? (user?.isAdmin ? "Admin" : user?.name) : "Profil"}
+              </Link>
+            </i>
+            <i className="fa-solid fa-cart-shopping">
+              <Link to="/shoppingcard" className="iconpanier">Panier</Link>
+            </i>
           </div>
         </div>
-        
+
         {/* Second row: navigation links */}
         <div className="navbar-bottom">
           <ul className="liste">
@@ -45,14 +47,14 @@ function Navbar({ hideAuthButtons }) {
             <Link to="/accessoires"><li>Accessoires Informatiques</li></Link>
             <Link to="/smartphones"><li>Smartphones & GSM</li></Link>
             <Link to="/iptv"><li>IPTV & Récepteurs</li></Link>
-            
+
             {isAuth && (
               <>
-                <li>
+                {/* <li>
                   <Link to={user?.isAdmin ? '/dashboard' : '/profil'}>
-                    {user?.isAdmin ? 'Dashboard' : 'Profil'}
+                    {user?.isAdmin ? 'Admin' : user?.name}
                   </Link>
-                </li>
+                </li> */}
                 <li>
                   <a href="#" onClick={handleLogout}>Déconnexion</a>
                 </li>
@@ -61,62 +63,53 @@ function Navbar({ hideAuthButtons }) {
           </ul>
         </div>
 
-        {/* Menu Mobile */}
+        {/* Mobile Menu */}
         <div className="bars-mobile">
-            <button
-              className={`mobile-menu-btn11 ${isMenuOpen ? 'active' : ''}`}
-              onClick={toggleMenu}
-            >
-              <span className="bar"></span>
-              <span className="bar"></span>
-              <span className="bar"></span>
-            </button>
+          <button
+            className={`mobile-menu-btn11 ${isMenuOpen ? 'active' : ''}`}
+            onClick={toggleMenu}
+          >
+            <span className="bar"></span>
+            <span className="bar"></span>
+            <span className="bar"></span>
+          </button>
 
-            <div className={`nav-content ${isMenuOpen ? 'active' : ''}`}>
-              <div className="nav-links">
+          <div className={`nav-content ${isMenuOpen ? 'active' : ''}`}>
+            <div className="nav-links">
               <Link to="/"> <div className="nav-item"><a href="#">Acceuil</a></div></Link>
-              <Link to="/solutions"> <div className="nav-item"><a href="#">Produits Scolaires</a></div></Link>
-                <div className="nav-item"><a href="#">Accessoires Informatiques</a></div>
-                <Link to="/company"> <div className="nav-item"><a href="#">Smartphones & GSM</a></div></Link>
-                <Link to="/contact"><div className="nav-item"><a href="#">IPTV & Récepteurs</a></div></Link>
-                
+              <Link to="/produitsscolaire"> <div className="nav-item"><a href="#">Produits Scolaires</a></div></Link>
+              <div className="nav-item"><a href="#">Accessoires Informatiques</a></div>
+              <Link to="/smartphones"> <div className="nav-item"><a href="#">Smartphones & GSM</a></div></Link>
+              <Link to="/iptv"><div className="nav-item"><a href="#">IPTV & Récepteurs</a></div></Link>
 
-                {isAuth ? (
-                  <>
-                    {user?.isAdmin ? (
-                      <div className="nav-item"><Link to="/dashboard">Dashboard</Link></div>
-                    ) : (
-                      <div className="nav-item"><Link to="/profil">Profil</Link></div>
-                    )}
-                    <div className="nav-item">
-                      <a
-                        href="#"
-                        onClick={() => {
-                          dispatch(logout());
-                          localStorage.removeItem('token');
-                        }}
-                      >
-                        Déconnexion
-                      </a>
-                    </div>
-                  </>
-                ) : (
-                  <>
-                    {!hideAuthButtons && (
-                      <>
-                        <div className="nav-item">
-                          <Link to="/login"><a href="#">Login</a></Link>
-                        </div>
-                        <div className="nav-item">
-                          <Link to="/Register"><a href="#">Register</a></Link>
-                        </div>
-                      </>
-                    )}
-                  </>
-                )}
-              </div>
+              {isAuth ? (
+                <>
+                  {user?.isAdmin ? (
+                    <div className="nav-item"><Link to="/dashboard">Admin</Link></div>
+                  ) : (
+                    <div className="nav-item"><Link to="/profil">{user?.name}</Link></div>
+                  )}
+                  <div className="nav-item">
+                    <a href="#" onClick={handleLogout}>Déconnexion</a>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {!hideAuthButtons && (
+                    <>
+                      <div className="nav-item">
+                        <Link to="/login">Login</Link>
+                      </div>
+                      <div className="nav-item">
+                        <Link to="/Register">Register</Link>
+                      </div>
+                    </>
+                  )}
+                </>
+              )}
             </div>
           </div>
+        </div>
       </nav>
     </header>
   );
