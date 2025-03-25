@@ -11,6 +11,7 @@ function Navbar({ hideAuthButtons }) {
   const isAuth = localStorage.getItem("token");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const {cartTotalQuantity} = useSelector((state) => state.cart)
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -71,7 +72,7 @@ function Navbar({ hideAuthButtons }) {
               <Link to="/shoppingcard" className="iconpanier">
                 Panier
               </Link>
-              <p className="quantity">0</p>
+              <p className="quantity"> {cartTotalQuantity} </p>
             </i>
           </div>
         </div>

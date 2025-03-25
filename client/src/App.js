@@ -3,7 +3,7 @@ import "./App.css";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import Register from "./components/Register";
 import Login from "./components/Login";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { logout, userCurrent } from "./JS/userSlice";
 import Profil from "./components/Profil";
@@ -35,6 +35,7 @@ function App() {
    
    
      }, [dispatch])
+     const [ping, setPing] = useState(false);
   return (
     <div className="App">
       {/* <div className="header">
@@ -62,13 +63,14 @@ function App() {
         <Route path="/smartphones" element={<Smartphones />} />
         <Route path="/produitsscolaire" element={<Produitscolaire />} />
         <Route path="/iptv" element={<IPTV />} />
-        <Route path="/shoppingcard" element={<Shoppingcard />} />
+        
         
 
 
 
         <Route element={<PrivateRoute />}>
           <Route path="/profil" element={<Profil />} />
+          <Route path="/shoppingcard" element={<Shoppingcard ping={ping} setping={setPing} />} />
         </Route>{" "}
 
 

@@ -3,6 +3,8 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const jwt = require("jsonwebtoken");
+const userRouter = express.Router();
+
 const {
   registerRules,
   loginRules,
@@ -18,9 +20,9 @@ const isAuth = require("../middelwares/passport");
 //REGISTER
 
 router.post("/register", registerRules(), validation, async (req, res) => {
-  const { name, lastname, email, password } = req.body;
+  const { name, lastname, email, password ,mobile,Address,  isAdmin } = req.body;
   try {
-    const newUser = new User({ name, lastname, email, password });
+    const newUser = new User({ name, lastname, email, password , Address ,mobile , isAdmin });
 
     // check if the email exist
     const searchedUser = await User.findOne({ email });
@@ -91,6 +93,44 @@ router.post("/login", loginRules(), validation, async (req, res) => {
 //get methode
 router.get("/current", isAuth(), (req, res) => {
   res.status(200).send({ user: req.user });
+});
+router.get('/all', async (req, res) => {
+  try {
+    const result = await User.find(); // Added semicolon
+    res.send({ user: result, msg: "Toutes les clients" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ msg: "Erreur lors de la récupération des clients" }); // Added error response
+  }
+});
+
+// Delete user
+router.delete('/:id', async (req, res) => {
+  try {
+    const result = await User.findByIdAndDelete(req.params.id); // Simplified the findByIdAndDelete method call
+    if (!result) {
+      return res.status(404).send({ msg: "user non trouvée" });
+    }
+    res.send({ user: result, msg: "user détruite" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ msg: "Erreur lors de la suppression de la user" });
+  }
+});
+
+
+// Update user
+router.put('/:id', async (req, res) => {
+  try {
+    const result = await User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true }); 
+    if (!result) {
+      return res.status(404).send({ msg: "user non trouvée" });
+    }
+    res.send({ user: result, msg: "user mise à jour" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({ msg: "Erreur lors de la mise à jour de user" });
+  }
 });
 
 module.exports = router;
