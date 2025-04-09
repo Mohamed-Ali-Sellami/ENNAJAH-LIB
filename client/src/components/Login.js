@@ -2,65 +2,83 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../JS/userSlice";
-import './styles/Login.css'
+import "./styles/Login.css";
 
 const Login = () => {
   const [login, setlogin] = useState({
     email: "",
     password: "",
   });
+
   const dispatch = useDispatch();
-  const isAuth = localStorage.getItem("token");
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+
+  const handleLogin = async () => {
+    try {
+      const res = await dispatch(userLogin(login));
+
+      if (res.payload?.user?._id) {
+        // Stocke correctement le user et le token
+        localStorage.setItem("user", JSON.stringify(res.payload.user));
+        localStorage.setItem("token", res.payload.token);
+
+        navigate("/profil");
+        window.location.reload();
+      } else {
+        alert("Échec de la connexion. Vérifiez vos identifiants.");
+      }
+    } catch (error) {
+      console.error("Erreur lors du login :", error);
+      alert("Erreur serveur.");
+    }
+  };
 
   return (
-    <div>
-      <div className="wrapper">
-        <form onSubmit={(e) => e.preventDefault()} className="form-signin">
-          <h2 className="form-signin-heading">Please login</h2>
+    <div className="wrapper">
+      <form onSubmit={(e) => e.preventDefault()} className="form-signin">
+        <h2 className="form-signin-heading">Please login</h2>
+
+        <input
+          type="text"
+          className="form-control"
+          name="username"
+          placeholder="Email Address"
+          required
+          autoFocus
+          onChange={(e) => setlogin({ ...login, email: e.target.value })}
+        />
+
+        <input
+          type="password"
+          className="form-control"
+          name="password"
+          placeholder="Password"
+          required
+          onChange={(e) => setlogin({ ...login, password: e.target.value })}
+        />
+
+        <label className="checkbox">
           <input
-            type="text"
-            className="form-control"
-            name="username"
-            placeholder="Email Address"
-            required=""
-            autofocus=""
-            onChange={(e) => setlogin({ ...login, email: e.target.value })}
-          />
-          <input
-            type="password"
-            className="form-control"
-            name="password"
-            placeholder="Password"
-            required=""
-            onChange={(e) => setlogin({ ...login, password: e.target.value })}
-          />
-          <label className="checkbox">
-            <input
-              type="checkbox"
-              value="remember-me"
-              id="rememberMe"
-              name="rememberMe"
-            />{" "}
-            Remember me
-          </label>
-          <button
-            className="btnlog btnlog-lg btnlog-primary btnlog-block"
-            onClick={() => {
-              dispatch(userLogin(login));
-              setTimeout(() => {
-                navigate("/profil");
-              }, 1000);
-              setTimeout(() => {
-                window.location.reload();
-              }, 1000);
-            }}
-          >
-            Login
-          </button>
-          u already have account <Link to="/register">Register now </Link>
-        </form>
-      </div>
+            type="checkbox"
+            value="remember-me"
+            id="rememberMe"
+            name="rememberMe"
+          />{" "}
+          Remember me
+        </label>
+
+        <button
+          className="btnlog btnlog-lg btnlog-primary btnlog-block"
+          onClick={handleLogin}
+        >
+          Login
+        </button>
+
+        <p>
+          You already have an account?{" "}
+          <Link to="/register">Register now</Link>
+        </p>
+      </form>
     </div>
   );
 };

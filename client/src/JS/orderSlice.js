@@ -1,43 +1,49 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-/////////////////////////GET order/////////////////////////////////////
-export const getorder = createAsyncThunk("/getorder", async () => {
+// GET all orders
+export const getorder = createAsyncThunk("order/getorder", async () => {
   try {
-    let resultat = axios.get("https://site-ecommerce1backend.vercel.app/order/all");
-    return await resultat;
+    const res = await axios.get("http://localhost:5800/order/all");
+    return res.data.order;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 });
-/////////////////////////ADD order//////////////////////////////////////////
-export const addorder = createAsyncThunk("/addorder", async (neworder) => {
-  try {
-    let resultat = axios.post("https://site-ecommerce1backend.vercel.app/order/add", neworder);
-    return await resultat;
-  } catch (error) {
-    console.log(error);
-  }
-});
-//////////////////////delete order////////////////////////////////////////
 
-export const deleteorder = createAsyncThunk("/deleteorder", async (id) => {
+// ADD a new order
+export const addorder = createAsyncThunk("order/addorder", async (neworder) => {
   try {
-    let resultat = axios.delete(`https://site-ecommerce1backend.vercel.app/order/${id}`);
-    return await resultat;
+    const res = await axios.post("http://localhost:5800/order/add", neworder);
+    return res.data.order;
   } catch (error) {
     console.log(error);
+    throw error;
   }
 });
-///////////////////////////update order////////////////////////////////
+
+// DELETE an order
+export const deleteorder = createAsyncThunk("order/deleteorder", async (id) => {
+  try {
+    await axios.delete(`http://localhost:5800/order/${id}`);
+    return id;
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+});
+
+// UPDATE an order
 export const updateorder = createAsyncThunk(
-  "/updateorder",
+  "order/updateorder",
   async ({ id, uporder }) => {
     try {
-      let resultat = axios.put(`https://site-ecommerce1backend.vercel.app/order/${id}`, uporder);
-      return await resultat;
+      const res = await axios.put(`http://localhost:5800/order/${id}`, uporder);
+      return res.data.updatedOrder;
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
 );
@@ -55,62 +61,60 @@ const orderSlice = createSlice({
   extraReducers: (builder) => {
     builder
 
-      //getorder
+      // GET
       .addCase(getorder.pending, (state) => {
         state.status = "pending";
       })
-
       .addCase(getorder.fulfilled, (state, action) => {
         state.status = "success";
-        state.orders = action.payload?.data?.order;
+        state.orders = action.payload;
       })
-
-      .addCase(getorder.rejected, (state) => {
+      .addCase(getorder.rejected, (state, action) => {
         state.status = "fail";
+        state.error = action.error.message;
       })
 
-      //addorder
+      // ADD
       .addCase(addorder.pending, (state) => {
         state.status = "pending";
       })
-
-      .addCase(addorder.fulfilled, (state) => {
+      .addCase(addorder.fulfilled, (state, action) => {
         state.status = "success";
+        state.orders.push(action.payload); // ajoute l'ordre localement
       })
-
-      .addCase(addorder.rejected, (state) => {
+      .addCase(addorder.rejected, (state, action) => {
         state.status = "fail";
+        state.error = action.error.message;
       })
 
-      //deleteorder
-
+      // DELETE
       .addCase(deleteorder.pending, (state) => {
         state.status = "pending";
       })
-
-      .addCase(deleteorder.fulfilled, (state) => {
+      .addCase(deleteorder.fulfilled, (state, action) => {
         state.status = "success";
+        state.orders = state.orders.filter(order => order._id !== action.payload);
       })
-
-      .addCase(deleteorder.rejected, (state) => {
+      .addCase(deleteorder.rejected, (state, action) => {
         state.status = "fail";
+        state.error = action.error.message;
       })
 
-      //Updateorder
+      // UPDATE
       .addCase(updateorder.pending, (state) => {
         state.status = "pending";
       })
-
-      .addCase(updateorder.fulfilled, (state) => {
+      .addCase(updateorder.fulfilled, (state, action) => {
         state.status = "success";
+        state.orders = state.orders.map(order =>
+          order._id === action.payload._id ? action.payload : order
+        );
       })
-
-      .addCase(updateorder.rejected, (state) => {
+      .addCase(updateorder.rejected, (state, action) => {
         state.status = "fail";
+        state.error = action.error.message;
       });
   },
 });
-
-export const {} = orderSlice.actions;
 
 export default orderSlice.reducer;

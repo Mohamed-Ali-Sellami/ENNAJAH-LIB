@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { NotificationManager } from "react-notifications"; // Assure-toi que cela est bien importé
-import "react-notifications/lib/notifications.css"; // Importe le CSS pour les notifications
+import { NotificationManager } from "react-notifications"; 
+import "react-notifications/lib/notifications.css"; 
 
 const initialState = {
   cartItems: localStorage.getItem("cartItems")
@@ -86,7 +86,7 @@ const cartSlice = createSlice({
     // Clear the cart
     clearCart(state) {
       state.cartItems = [];
-      NotificationManager.success("Panier vidé", "Commande annulée");
+      NotificationManager.success("Panier vide Maintenant !",);
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
   },

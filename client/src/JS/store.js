@@ -5,5 +5,5 @@ import cartSlice from './cartSlice'
 import orderSlice from './orderSlice'
 
 export const store = configureStore({
-  reducer: {user:userSlice, Product:ProductsSlice , cart:cartSlice , Order:orderSlice},
+  reducer: {user:userSlice, Product:ProductsSlice , cart:cartSlice , order:orderSlice},
 });

@@ -1,78 +1,99 @@
 .profile-container {
-    max-width: 600px;
-    margin: 50px auto;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .profile-header {
-    margin-bottom: 20px;
-  }
-  
-  .profile-header   img {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-bottom: 10px;
-  }
-  
-  .profile-name {
-    font-size: 24px;
-    font-weight: bold;
-  }
-  
-  .profile-email {
-    color: gray;
-    font-size: 16px;
-  }
-  
-  .edit-profile-btn {
-    background-color: #007bff;
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .edit-profile-btn:hover {
-    background-color: #0056b3;
-  }
-  
-  .profile-info,
-  .order-history {
-    text-align: left;
-    margin-top: 20px;
-  }
-  
-  .profile-info h2,
-  .order-history h2 {
-    font-size: 20px;
-    border-bottom: 2px solid #007bff;
-    padding-bottom: 5px;
-  }
-  
-  .profile-info p,
-  .order-history p,
-  .order-history ul {
-    font-size: 16px;
-    margin: 5px 0;
-  }
-  
-  .order-history ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .order-history li {
-    background: #f9f9f9;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 5px;
-  }
-  
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-header img {
+  width: 120px;
+  border-radius: 50%;
+}
+
+.profile-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.profile-email {
+  font-size: 16px;
+  color: gray;
+}
+
+.order-history {
+  margin-top: 30px;
+}
+
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.order-card {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.order-id {
+  font-weight: bold;
+}
+
+.order-date {
+  color: gray;
+}
+
+.order-status {
+  font-weight: bold;
+}
+
+.order-items {
+  margin-top: 10px;
+}
+
+.order-item {
+  display: flex;
+  margin-bottom: 15px;
+}
+
+.order-item-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 15px;
+}
+
+.order-item-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.order-item-name,
+.order-item-model,
+.order-item-quantity,
+.order-item-price {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.order-total {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.no-orders {
+  text-align: center;
+  color: #888;
+}

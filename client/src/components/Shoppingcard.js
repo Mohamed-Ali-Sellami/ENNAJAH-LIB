@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, decreaseCart, removeFromCart, clearCart, getTotals } from "../JS/cartSlice";
+import {
+  addToCart,
+  decreaseCart,
+  removeFromCart,
+  clearCart,
+  getTotals,
+} from "../JS/cartSlice";
 import { addorder } from "../JS/orderSlice";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/Shoppingcard.css";
@@ -9,23 +15,32 @@ const ShoppingCard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  //  useSelector AVANT useEffect
   const { cartItems, cartTotalAmount } = useSelector((store) => store.cart);
 
   useEffect(() => {
     dispatch(getTotals());
-  }, [cartItems, dispatch]); 
+  }, [cartItems, dispatch]);
 
   const handleDecreaseCart = (product) => dispatch(decreaseCart(product));
   const handleIncreaseCart = (product) => dispatch(addToCart(product));
   const handleRemoveFromCart = (product) => dispatch(removeFromCart(product));
 
   const handleConfirmOrder = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    const userId = user?._id || user?.id;
+
+    if (!userId) {
+      alert("Utilisateur non connecté. Veuillez vous connecter.");
+      return;
+    }
+
     const newOrder = {
+      userId,
       orderItems: cartItems,
       totalPrice: cartTotalAmount,
       isDelivered: "pending",
     };
+
     dispatch(addorder(newOrder));
     dispatch(clearCart());
     navigate("/");
@@ -47,13 +62,33 @@ const ShoppingCard = () => {
                 </div>
               </div>
               <div className="item-quantity">
-                <button className="quantity-btn minus-btn" onClick={() => handleDecreaseCart(item)}>-</button>
-                <input type="text" className="quantity-input" value={item.cartQuantity} readOnly />
-                <button className="quantity-btn plus-btn" onClick={() => handleIncreaseCart(item)}>+</button>
+                <button
+                  className="quantity-btn minus-btn"
+                  onClick={() => handleDecreaseCart(item)}
+                >
+                  -
+                </button>
+                <input
+                  type="text"
+                  className="quantity-input"
+                  value={item.cartQuantity}
+                  readOnly
+                />
+                <button
+                  className="quantity-btn plus-btn"
+                  onClick={() => handleIncreaseCart(item)}
+                >
+                  +
+                </button>
               </div>
               <div className="item-price-section">
                 <span className="item-price">${item.price}</span>
-                <button onClick={() => handleRemoveFromCart(item)} className="remove-item">×</button>
+                <button
+                  onClick={() => handleRemoveFromCart(item)}
+                  className="remove-item"
+                >
+                  ×
+                </button>
               </div>
             </div>
           ))
@@ -61,8 +96,12 @@ const ShoppingCard = () => {
           <p className="empty-cart">Votre panier est vide</p>
         )}
         <div className="cart-footer">
-          <Link to="/"><button className="continue-shopping">← Continue Shopping</button></Link>
-          <button className="confirm-order" >Confirmez la Commande</button>
+          <Link to="/">
+            <button className="continue-shopping">← Continue Shopping</button>
+          </Link>
+          <button className="confirm-order" onClick={handleConfirmOrder}>
+            Confirmez la Commande
+          </button>
           <div className="subtotal-section">
             Subtotal: <strong>${cartTotalAmount}</strong>
           </div>

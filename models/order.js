@@ -1,70 +1,33 @@
-const mongoose=require('mongoose')
-const schema=mongoose.Schema
-const orderschema=new schema( [
-    
-   {
- 
-    orderItems: [],
-    
-    
-    isDelivered: {
-        type: String,
-        default: "pending",
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const orderSchema = new Schema({
+  userId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true,
+  },
+  orderItems: [
+    {
+      name: String,
+      model: String,
+      price: Number,
+      cartQuantity: Number,
+      Image: String,
     },
+  ],
+  totalPrice: {
+    type: Number,
+    default: 0.0,
+  },
+  isDelivered: {
+    type: String,
+    default: 'pending',
+  },
+  deliveredAt: {
+    type: Date,
+  },
+});
 
-
-    totalPrice: {
-        type: Number,
-        default: 0.0,
-    },
-
-    // shippingAddress: {
-    //     address: { type: String, },
-    //     city: { type: String,  },
-    //     postalCode: { type: String, },
-    //     country: { type: String,  },
-    // },
-
-    // paymentMethod: {
-    //     type: String,
-       
-    // },
-
-    // paymentResult: {
-    //     id: { type: String },
-    //     status: { type: String },
-    //     update_time: { type: String },
-        
-    // },
-
-    // taxPrice: {
-    //     type: Number,
-      
-    //     default: 0.0,
-    // },
-
-    // shippingPrice: {
-    //     type: Number,
-    //     default: 0.0,
-    // },
-
-   
-
-    // isPaid: {
-    //     type: Boolean,
-    //     default: false,
-    // },
-    
-    // paidAt: {
-    //     type: Date,
-    // },
-    
-    
-    // deliveredAt: {
-    //     type: Date,
-    // },
-
-}])
-
-const order=mongoose.model('collection_order',orderschema)
-module.exports=order
+const Order = mongoose.model('Order', orderSchema);
+module.exports = Order;
