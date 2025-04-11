@@ -17,6 +17,8 @@ import Produitscolaire from "./components/Produitscolaire";
 import IPTV from "./components/IPTV";
 import { getproduct } from "./JS/ProductsSlice";
 import Shoppingcard from "./components/Shoppingcard";
+import HomeAdmin from "./components/Dashboard/Components/HomeAdmin";
+import GestionUser from "./components/Dashboard/Components/GestionUser";
 
 function App() {
   const isAuth = localStorage.getItem("token");
@@ -51,7 +53,7 @@ function App() {
           </button>
         ) : null}
       </div> */}
-<Navbar/>
+
       {/* Autres composants */}
       <NotificationContainer />
 
@@ -71,6 +73,9 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route path="/profil" element={<Profil />} />
           <Route path="/shoppingcard" element={<Shoppingcard ping={ping} setping={setPing} />} />
+          <Route path="/Dashboard" element={<HomeAdmin />} />
+          <Route path="/gestionusers" element={<GestionUser />} />
+          
         </Route>{" "}
 
 

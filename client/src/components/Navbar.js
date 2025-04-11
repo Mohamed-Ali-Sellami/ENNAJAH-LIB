@@ -12,8 +12,14 @@ function Navbar({ hideAuthButtons }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const {cartTotalQuantity} = useSelector((state) => state.cart)
-
+  const [selectedCategory, setSelectedCategory] = useState("all");
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+  
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+  
+
 
   const handleLogout = () => {
     dispatch(logout());
@@ -39,25 +45,23 @@ function Navbar({ hideAuthButtons }) {
           </div>
 
           {/* Barre de recherche */}
-          <form className="search-bar" onSubmit={handleSearchSubmit}>
-            <select className="search-category">
-              <option value="all">Toutes catégories</option>
-              <option value="scolaire">Produits Scolaires</option>
-              <option value="informatique">Accessoires Informatiques</option>
-              <option value="smartphones">Smartphones & GSM</option>
-              <option value="iptv">IPTV & Récepteurs</option>
-            </select>
-            <input
-              type="text"
-              className="search-input"
-              placeholder="Rechercher un produit"
-              value={searchQuery}
-              onChange={handleSearchChange}
-            />
-            <button type="submit" className="search-button">
-              <i className="fa-solid fa-search"></i>
-            </button>
-          </form>
+          <form className="search-container" onSubmit={handleSearchSubmit}>
+  <div className="search-box">
+    <input
+      type="text"
+      className="search-input"
+      placeholder="Rechercher un produit..."
+      value={searchQuery}
+      onChange={handleSearchChange}
+    />
+    <button type="submit" className="search-button">
+      <i className="fas fa-search"></i>
+    </button>
+  </div>
+</form>
+
+
+
 
           <div className="navbar-icons">
             <i className="fa-solid fa-user">
@@ -98,7 +102,7 @@ function Navbar({ hideAuthButtons }) {
 
             {isAuth && (
               <li>
-                <button onClick={handleLogout}>Déconnexion</button>
+                <button  className="btndeconnexion" onClick={handleLogout}>Déconnexion</button>
               </li>
             )}
           </ul>

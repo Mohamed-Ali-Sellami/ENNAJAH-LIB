@@ -10,7 +10,7 @@ const Home = () => {
   return (
     <div>
       
-      
+      <Navbar/>
      <Banniere/>
       <Section1/>
       <Section2/>

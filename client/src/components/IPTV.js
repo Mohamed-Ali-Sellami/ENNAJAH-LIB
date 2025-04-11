@@ -2,6 +2,8 @@ import React from 'react'
 import './styles/IPTV.css'
 import { useSelector } from 'react-redux'
 import Card from './Card'
+import Navbar from './Navbar'
+import Footer from './Footer'
 const IPTV = () => {
 
 
@@ -13,6 +15,7 @@ const IPTV = () => {
   return (
     
     <div>
+      <Navbar/>
         <div className='content1'>
       <h1> Liste IPTV & Les Recepteurs</h1>
 
@@ -26,7 +29,7 @@ const IPTV = () => {
       </div>
       
     </div>
-      
+      <Footer/>
     </div>
   )
 }

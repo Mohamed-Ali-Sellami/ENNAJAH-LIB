@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import "./styles/Profil.css";
 import imageprofile from "./images/Profil.png";
+import Navbar from "./Navbar";
 
 const Profil = () => {
   const user = useSelector((state) => state.user.user);
@@ -10,7 +11,7 @@ const Profil = () => {
 
   useEffect(() => {
     if (user) {
-      axios.get(`http://localhost:5000/api/orders/user/${user._id}`)
+      axios.get(`http://localhost:5800/api/orders/user/${user._id}`)
         .then((res) => setOrders(res.data.orders))
         .catch((err) => console.error("Erreur de récupération des commandes", err));
     }
@@ -21,6 +22,8 @@ const Profil = () => {
   }
 
   return (
+    <div>
+      <Navbar/>
     <div className="profile-container">
       <div className="profile-header">
         <img src={imageprofile} alt="Profil" />
@@ -73,6 +76,7 @@ const Profil = () => {
           <p className="no-orders">Aucune commande passée.</p>
         )}
       </div>
+    </div>
     </div>
   );
 };

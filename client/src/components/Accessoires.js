@@ -2,6 +2,8 @@ import React from 'react'
 import './styles/Accessoires.css'
 import { useSelector } from 'react-redux'
 import Card from './Card'
+import Navbar from './Navbar'
+import Footer from './Footer'
 
 const Accessoires = () => {
 
@@ -11,7 +13,8 @@ const Accessoires = () => {
      console.log(accessoires)
 
   return (
-    
+    <div>
+    <Navbar/>
        <div className='content1'>
       <h1> Liste Accessoires</h1>
 
@@ -23,7 +26,8 @@ const Accessoires = () => {
       <div className='boxphone'>
     {accessoires?.map((el)=><Card data={el}/>)}
       </div>
-      
+      </div>
+      <Footer/>
     </div>
   )
 }

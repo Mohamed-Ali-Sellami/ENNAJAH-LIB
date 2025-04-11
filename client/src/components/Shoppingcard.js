@@ -7,7 +7,8 @@ import {
   clearCart,
   getTotals,
 } from "../JS/cartSlice";
-import { addorder } from "../JS/orderSlice";
+import { createOrder } from "../JS/orderSlice";
+
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/Shoppingcard.css";
 
@@ -41,7 +42,8 @@ const ShoppingCard = () => {
       isDelivered: "pending",
     };
 
-    dispatch(addorder(newOrder));
+    dispatch(createOrder(newOrder));
+
     dispatch(clearCart());
     navigate("/");
   };
@@ -82,7 +84,7 @@ const ShoppingCard = () => {
                 </button>
               </div>
               <div className="item-price-section">
-                <span className="item-price">${item.price}</span>
+                <span className="item-price">{item.price} TND</span>
                 <button
                   onClick={() => handleRemoveFromCart(item)}
                   className="remove-item"
@@ -103,7 +105,7 @@ const ShoppingCard = () => {
             Confirmez la Commande
           </button>
           <div className="subtotal-section">
-            Subtotal: <strong>${cartTotalAmount}</strong>
+            Subtotal: <strong>{cartTotalAmount} TND </strong>
           </div>
         </div>
       </div>

@@ -1,0 +1,50 @@
+.navbardash {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #f0f0f7;
+    padding: 10px 20px;
+    color: #0066cc;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+  }
+  
+  .logo-img {
+    height: 50px;
+    width: auto;
+  }
+  
+  .nav-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 250px;
+    align-items: center;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* réduit l'espace entre l'icône et le texte */
+    color: #0066cc;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-item i {
+    font-size: 18px;
+    margin-right: 0;
+  }
+  
+  
+  .nav-item:hover {
+    color: #00bcd4;
+  }
+  
+  
+  

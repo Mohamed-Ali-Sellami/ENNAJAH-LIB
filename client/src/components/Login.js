@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogin } from "../JS/userSlice";
+import Navbar from './Navbar'
+import Footer from './Footer'
 import "./styles/Login.css";
 
 const Login = () => {
@@ -34,7 +36,10 @@ const Login = () => {
   };
 
   return (
+    <div>
+       <Navbar/>
     <div className="wrapper">
+     
       <form onSubmit={(e) => e.preventDefault()} className="form-signin">
         <h2 className="form-signin-heading">Please login</h2>
 
@@ -79,6 +84,8 @@ const Login = () => {
           <Link to="/register">Register now</Link>
         </p>
       </form>
+    </div>
+    
     </div>
   );
 };
