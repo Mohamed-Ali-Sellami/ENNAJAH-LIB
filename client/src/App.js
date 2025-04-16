@@ -19,6 +19,8 @@ import { getproduct } from "./JS/ProductsSlice";
 import Shoppingcard from "./components/Shoppingcard";
 import HomeAdmin from "./components/Dashboard/Components/HomeAdmin";
 import GestionUser from "./components/Dashboard/Components/GestionUser";
+import GestiondesProduits from "./components/Dashboard/Components/GestiondesProduits";
+import CommandesAdmin from "./components/Dashboard/Components/CommandesAdmin";
 
 function App() {
   const isAuth = localStorage.getItem("token");
@@ -75,6 +77,8 @@ function App() {
           <Route path="/shoppingcard" element={<Shoppingcard ping={ping} setping={setPing} />} />
           <Route path="/Dashboard" element={<HomeAdmin />} />
           <Route path="/gestionusers" element={<GestionUser />} />
+          <Route path="/gestionproduits" element={<GestiondesProduits />} />
+          <Route path="/commandes" element={<CommandesAdmin />} />
           
         </Route>{" "}
 

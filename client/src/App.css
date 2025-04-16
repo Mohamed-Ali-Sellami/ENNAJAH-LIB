@@ -23,8 +23,10 @@ body {
   height: 100%;
   object-fit: cover;
 }
+
+
 /****************************************************Dashboard****************************************************/
-/********************************************dashboard*********************************/
+
   
 .dashboarddash {
   display: flex;
@@ -175,109 +177,227 @@ body {
 }
 
 /********************************Gestion users***************************/
-
+/* Container principal */
 .box-gestionuserdash {
-  width: 100%;
-  margin-top: 80px;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 2rem;
 }
-
-
-
-.box-gestionuserdash input[type="text"] {
-  width: 100%;
-  max-width: 300px;
-  padding: 10px;
-  margin: 10px 0;
-  border: 2px solid #007bff;
-  border-radius: 5px;
-  outline: none;
-  font-size: 16px;
-  transition: all 0.3s ease-in-out;
-}
-
-.box-gestionuserdash input[type="text"]:focus {
-  border-color: #0056b3;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.5);
-}
-
 
 .box-gestionuserdash h1 {
-  width: 100%;
-  color: #16325b;
-  text-align: center;
-  align-items: center;
-  padding-top: 50px;
-  margin-bottom: 20px;
-  margin-top: 20px;
-  background-color: white;
-  height: 100px;
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #333;
 }
 
+/* Champ de recherche */
+.box-gestionuserdash input[type="text"] {
+  padding: 0.6rem 1rem;
+  width: 100%;
+  max-width: 400px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+
+/* Formulaire de mise à jour */
+.updatecarsettings {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.updatecarsettings h2 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #444;
+}
+
+.updatecarsettings label {
+  display: block;
+  margin: 0.8rem 0 0.3rem;
+  font-weight: 500;
+}
+
+.updatecarsettings input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* Boutons */
+.btn-up-ok,
+.btn-cancel {
+  padding: 0.6rem 1.2rem;
+  margin-top: 1.2rem;
+  margin-right: 0.8rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-up-ok {
+  background-color: #4caf50;
+  color: white;
+}
+
+.btn-up-ok:hover {
+  background-color: #43a047;
+}
+
+.btn-cancel {
+  background-color: #f44336;
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #e53935;
+}
+
+/* Table */
 .bodygestionuserdash table {
   width: 100%;
   border-collapse: collapse;
-  font-family: Arial, sans-serif;
-  
-}
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 12px;
-  text-align: center;
-}
-th {
-  background-color: #f2f2f2;
-  font-weight: bold;
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  table-layout: fixed; /* Important pour gérer les largeurs */
 }
 
-tr:nth-child(even) {
-  background-color: #f9f9f9;
+.bodygestionuserdash thead {
+  background-color: #f0f0f0;
 }
-tr:hover {
-  background-color: #f5f5f5;
+
+.tetetable th {
+  text-align: left;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #333;
 }
-@media screen and (max-width: 600px) {
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
+
+/* Colonnes spécifiques */
+.bodygestionuserdash th:nth-child(1),
+.bodygestionuserdash td:nth-child(1) {
+  width: 20%;
+}
+
+.bodygestionuserdash th:nth-child(2),
+.bodygestionuserdash td:nth-child(2) {
+  width: 25%;
+}
+
+.bodygestionuserdash th:nth-child(3),
+.bodygestionuserdash td:nth-child(3) {
+  width: 20%;
+}
+
+.bodygestionuserdash th:nth-child(4),
+.bodygestionuserdash td:nth-child(4) {
+  width: 20%;
+}
+
+.bodygestionuserdash th:nth-child(5),
+.bodygestionuserdash td:nth-child(5) {
+  width: 15%;
+}
+
+.bodygestionuserdash td {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+  font-size: 0.95rem;
+  color: #555;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bodygestionuserdash td[data-label]:before {
+  display: none;
+}
+
+/* Actions */
+.settingsadmin {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.deletebtn,
+.updatebtn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.deletebtn {
+  background-color: red;
+  color: white;
+}
+
+.deletebtn:hover {
+  background-color: darkred;
+}
+
+.updatebtn {
+  background-color: green;
+  color: white;
+}
+
+.updatebtn:hover {
+  background-color: darkgreen;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .bodygestionuserdash table,
+  .bodygestionuserdash thead,
+  .bodygestionuserdash tbody,
+  .bodygestionuserdash th,
+  .bodygestionuserdash td,
+  .bodygestionuserdash tr {
     display: block;
   }
-  thead tr {
-    position: absolute;
-    top: -9999px;
-    left: -9999px;
+
+  .bodygestionuserdash thead {
+    display: none;
   }
-  tr {
-    margin-bottom: 15px;
-  }
-  td {
-    border: none;
+
+  .bodygestionuserdash td {
     position: relative;
     padding-left: 50%;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #eee;
+    white-space: normal;
   }
-  td:before {
+
+  .bodygestionuserdash td:before {
     position: absolute;
-    top: 6px;
-    left: 6px;
+    top: 1rem;
+    left: 1rem;
     width: 45%;
-    padding-right: 10px;
     white-space: nowrap;
-    content: attr(data-label);
     font-weight: bold;
+    color: #666;
+    content: attr(data-label);
   }
 }
 
-.btnaddcar {
-  background-color: #16325b;
-  color: white;
-  border-radius: 10px;
-  font-size: 25px;
-  margin-bottom: 20px;
-  margin-left: 500px;
-}
+
 
 /****************************************ADD User******************************/
 

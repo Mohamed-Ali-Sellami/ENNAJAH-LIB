@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "./styles/Navbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import imglogo from "./images/logo.png";
 import { logout } from "../JS/userSlice";
 
 function Navbar({ hideAuthButtons }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const isAuth = localStorage.getItem("token");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -22,8 +23,16 @@ function Navbar({ hideAuthButtons }) {
 
 
   const handleLogout = () => {
-    dispatch(logout());
+    // Supprimer les données de l'utilisateur
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    localStorage.removeItem("cartItems");
+    
+    // Déconnecter l'utilisateur dans Redux
+    dispatch(logout());
+    
+    // Rediriger vers la page de connexion
+    navigate("/login");
   };
 
   const handleSearchChange = (e) => {
@@ -102,7 +111,9 @@ function Navbar({ hideAuthButtons }) {
 
             {isAuth && (
               <li>
-                <button  className="btndeconnexion" onClick={handleLogout}>Déconnexion</button>
+                <Link to="/login" onClick={handleLogout} className="deconnexion-link">
+                  Déconnexion
+                </Link>
               </li>
             )}
           </ul>
@@ -149,7 +160,9 @@ function Navbar({ hideAuthButtons }) {
 
               {isAuth && (
                 <div className="nav-item">
-                  <button onClick={handleLogout}>Déconnexion</button>
+                  <Link to="/login" onClick={handleLogout} className="deconnexion-link">
+                    Déconnexion
+                  </Link>
                 </div>
               )}
             </div>

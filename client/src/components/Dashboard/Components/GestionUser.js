@@ -20,7 +20,7 @@ const GestionUser = () => {
         name: "",
         email: "",
         mobile: "",
-        company: "",
+        Address: "",
     });
 
     const handleUpdateClick = (user) => {
@@ -30,7 +30,7 @@ const GestionUser = () => {
             name: user?.name || "",
             email: user?.email || "",
             mobile: user?.mobile || "",
-            company: user?.company || "",
+            company: user?.Address || "",
         });
     };
 
@@ -92,11 +92,11 @@ const GestionUser = () => {
                             onChange={(e) => setUpdatedUser({ ...updatedUser, mobile: e.target.value })}
                         />
 
-                        <label>Entreprise :</label>
+                        <label> Address: :</label>
                         <input
                             type="text"
-                            value={updatedUser.company}
-                            onChange={(e) => setUpdatedUser({ ...updatedUser, company: e.target.value })}
+                            value={updatedUser. Address}
+                            onChange={(e) => setUpdatedUser({ ...updatedUser,  Address: e.target.value })}
                         />
 
                         <button className="btn-up-ok" onClick={handleUpdateSubmit}>Valider</button>
@@ -111,7 +111,7 @@ const GestionUser = () => {
                             <th>Utilisateur</th>
                             <th>Email</th>
                             <th>Téléphone Mobile</th>
-                            <th>Entreprise</th>
+                            <th> Address</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
@@ -121,7 +121,7 @@ const GestionUser = () => {
                                 <td data-label="Utilisateur">{user?.name} {user?.lastname}</td>
                                 <td data-label="Email">{user?.email}</td>
                                 <td data-label="Téléphone Mobile">{user?.mobile}</td>
-                                <td data-label="Entreprise">{user?.company}</td>
+                                <td data-label="Entreprise">{user?. Address}</td>
                                 <td data-label="Actions">
                                     <div className="settingsadmin">
                                         <button className="deletebtn" onClick={() => handleDelete(user?._id)}>Delete</button>

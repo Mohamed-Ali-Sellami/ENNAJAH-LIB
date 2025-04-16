@@ -2,6 +2,7 @@ import React from 'react'
 import './styles/Smartphones.css'
 import { useSelector } from 'react-redux'
 import Card from './Card'
+import Navbar from './Navbar'
 
 const Smartphones = () => {
 
@@ -10,6 +11,8 @@ const Smartphones = () => {
      const  smartphones = allproducts.filter((data) => data?.Category === "smartphones");
      console.log(smartphones)
   return (
+    <div>
+      <Navbar/>
     <div className='content1'>
       <h1> Listes Gsm & Smartphones</h1>
 
@@ -21,7 +24,7 @@ const Smartphones = () => {
       <div className='boxphone'>
     {smartphones?.map((el)=><Card data={el}/>)}
       </div>
-      
+      </div>
     </div>
   )
 }

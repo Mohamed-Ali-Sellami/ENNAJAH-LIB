@@ -7,7 +7,7 @@ export const getAllOrders = createAsyncThunk(
   "order/getAllOrders",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.get("http://localhost:5800/api/orders");
+      const res = await axios.get("http://localhost:5800/order");
       return res.data.orders;
     } catch (error) {
       return rejectWithValue(error.response.data.message || error.message);
@@ -20,7 +20,7 @@ export const getOrdersByUser = createAsyncThunk(
   "order/getOrdersByUser",
   async (userId, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`http://localhost:5800/api/orders/user/${userId}`);
+      const res = await axios.get(`http://localhost:5800/order/user/${userId}`);
       return res.data.orders;
     } catch (error) {
       return rejectWithValue(error.response.data.message || error.message);
@@ -33,7 +33,7 @@ export const getOrderById = createAsyncThunk(
   "order/getOrderById",
   async (orderId, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`http://localhost:5800/api/orders/${orderId}`);
+      const res = await axios.get(`http://localhost:5800/order/${orderId}`);
       return res.data.order;
     } catch (error) {
       return rejectWithValue(error.response.data.message || error.message);
@@ -46,10 +46,11 @@ export const createOrder = createAsyncThunk(
   "order/createOrder",
   async (orderData, { rejectWithValue }) => {
     try {
-      const res = await axios.post("http://localhost:5800/api/orders", orderData);
+      const res = await axios.post("http://localhost:5800/order/add", orderData);
       return res.data.order;
     } catch (error) {
-      return rejectWithValue(error.response.data.message || error.message);
+      console.error("Erreur détaillée:", error.response?.data || error.message);
+      return rejectWithValue(error.response?.data?.msg || error.message);
     }
   }
 );

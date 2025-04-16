@@ -24,6 +24,10 @@ const orderSchema = new Schema({
     type: String,
     default: 'pending',
   },
+  orderDate: {
+    type: Date,
+    default: Date.now,
+  },
   deliveredAt: {
     type: Date,
   },
