@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteproduct, getproduct, updateproduct } from '../../../JS/ProductsSlice';
+import { deleteproduct, getproduct, updateproduct, addproduct } from '../../../JS/ProductsSlice';
 import Navbardash from './Navbardash';
 
 const GestiondesProduits = () => {
@@ -9,7 +9,15 @@ const GestiondesProduits = () => {
 
     const [searchLetter, setSearchLetter] = useState("");
     const [showUpdateForm, setShowUpdateForm] = useState(false);
+    const [showAddForm, setShowAddForm] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [newProduct, setNewProduct] = useState({
+        name: "",
+        price: "",
+        Image: "",
+        description: "",
+        Category: ""
+    });
     const [updatedProduct, setUpdatedProduct] = useState({
         name: "",
         price: "",
@@ -51,6 +59,20 @@ const GestiondesProduits = () => {
         }
     };
 
+    const handleAddSubmit = () => {
+        dispatch(addproduct(newProduct)).then(() => {
+            setShowAddForm(false);
+            setNewProduct({
+                name: "",
+                price: "",
+                Image: "",
+                description: "",
+                Category: ""
+            });
+            dispatch(getproduct());
+        });
+    };
+
     const filteredProducts = allProducts?.filter(product =>
         searchLetter === "" || product?.name?.toLowerCase().startsWith(searchLetter.toLowerCase())
     );
@@ -61,12 +83,60 @@ const GestiondesProduits = () => {
             <div className="box-gestionuserdash">
                 <h1>Gestion des Produits</h1>
 
-                <input
-                    type="text"
-                    placeholder="Rechercher par première lettre..."
-                    value={searchLetter}
-                    onChange={(e) => setSearchLetter(e.target.value)}
-                />
+                <div className="search-add-container">
+                    <input
+                        type="text"
+                        placeholder="Rechercher par première lettre..."
+                        value={searchLetter}
+                        onChange={(e) => setSearchLetter(e.target.value)}
+                    />
+                    <button className="add-product-btn" onClick={() => setShowAddForm(true)}>
+                        Ajouter un produit
+                    </button>
+                </div>
+
+                {showAddForm && (
+                    <div className="add-product-form">
+                        <h2>Ajouter un nouveau produit</h2>
+                        <label>Nom :</label>
+                        <input
+                            type="text" placeholder='Nom de votre produit'
+                            value={newProduct.name}
+                            onChange={(e) => setNewProduct({ ...newProduct, name: e.target.value })}
+                        />
+
+                        <label>Prix :</label>
+                        <input
+                            type="text" placeholder='Prix de votre produit'
+                            value={newProduct.price}
+                            onChange={(e) => setNewProduct({ ...newProduct, price: e.target.value })}
+                        />
+
+                        <label>Image (URL) :</label>
+                        <input
+                            type="text" placeholder='lien image '
+                            value={newProduct.Image}
+                            onChange={(e) => setNewProduct({ ...newProduct, Image: e.target.value })}
+                        />
+
+                        <label>Description :</label>
+                        <input
+                            type="text" placeholder='description de votre produit'
+                            value={newProduct.description}
+                            onChange={(e) => setNewProduct({ ...newProduct, description: e.target.value })}
+                        />
+
+                        <label>Catégorie :</label>
+                        <input
+                            type="text" placeholder='IPTV / Accessoires / smartphones / produitscolaire'
+                            value={newProduct.Category}
+                            onChange={(e) => setNewProduct({ ...newProduct, Category: e.target.value })}
+                        />
+
+                        <button className="btn-add-ok" onClick={handleAddSubmit}>Valider</button>
+                        <button className="btn-cancel" onClick={() => setShowAddForm(false)}>Annuler</button>
+                    </div>
+                )}
 
                 {showUpdateForm && selectedProduct && (
                     <div className="updatecarsettings">
@@ -88,7 +158,7 @@ const GestiondesProduits = () => {
                         <label>Image (URL) :</label>
                         <input
                             type="text"
-                            value={updatedProduct.image}
+                            value={updatedProduct.Image}
                             onChange={(e) => setUpdatedProduct({ ...updatedProduct, Image: e.target.value })}
                         />
 
@@ -102,7 +172,7 @@ const GestiondesProduits = () => {
                         <label>Catégorie :</label>
                         <input
                             type="text"
-                            value={updatedProduct.category}
+                            value={updatedProduct.Category}
                             onChange={(e) => setUpdatedProduct({ ...updatedProduct, Category: e.target.value })}
                         />
 
@@ -137,7 +207,7 @@ const GestiondesProduits = () => {
                                 <td data-label="Actions">
                                     <div className="settingsadmin">
                                         <button className="deletebtn" onClick={() => handleDelete(product?._id)}>Delete</button>
-                                        <button className="updatebtn" onClick={() => handleUpdateClick(product)}>Modifier</button>
+                                        <button className="updatebtn" onClick={() => handleUpdateClick(product)}>Update</button>
                                     </div>
                                 </td>
                             </tr>

@@ -1,379 +1,68 @@
-.containercommandes {
-  display: flex;
-  min-height: calc(100vh - 64px);
-  background-color: #f8f9fa;
+/* Styles pour les badges de statut */
+.status-badge {
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
 }
 
-.commandes-content {
+.status-badge.pending {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeeba;
+}
+
+.status-badge.delivered {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+/* Style pour le bouton de détails */
+.viewbtn {
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.viewbtn:hover {
+  background-color: #138496;
+}
+
+/* Styles pour les filtres */
+.filter-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.filter-controls input, 
+.filter-controls select {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.filter-controls input {
   flex: 1;
+  min-width: 200px;
+}
+
+/* Message quand il n'y a pas de commandes */
+.no-orders {
+  text-align: center;
   padding: 20px;
-  margin-left: 250px;
-}
-
-.commandes-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.commandes-header h2 {
-  color: #333;
-  margin: 0;
-}
-
-.search-bar input {
-  padding: 8px 15px;
-  border: 1px solid #ddd;
-  border-radius: 20px;
-  width: 300px;
-  font-size: 14px;
-}
-
-.commandes-table-container {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.commandes-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.commandes-table th,
-.commandes-table td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #eee;
-}
-
-.commandes-table th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-  color: #333;
-}
-
-.commandes-table tr:hover {
-  background-color: #f5f5f5;
-}
-
-.status-badge {
-  padding: 5px 10px;
-  border-radius: 15px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.status-badge.pending {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.status-badge.delivered {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.view-details-btn {
-  padding: 6px 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.view-details-btn:hover {
-  background-color: #0056b3;
-}
-
-/* Modal styles */
-.order-details-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: white;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 900px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #eee;
-}
-
-.modal-header h3 {
-  margin: 0;
-  color: #333;
-}
-
-.close-modal-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
+  font-size: 1.1rem;
   color: #666;
 }
 
-.modal-body {
-  padding: 20px;
-}
-
-.order-info {
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-}
-
-.order-items {
-  margin-bottom: 20px;
-}
-
-.items-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
-
-.items-table th,
-.items-table td {
-  padding: 10px;
-  border: 1px solid #ddd;
-  text-align: left;
-}
-
-.items-table th {
-  background-color: #f8f9fa;
-}
-
-.order-total {
-  text-align: right;
-  padding: 15px;
-  background-color: #f8f9fa;
-  border-radius: 4px;
-}
-
-.order-total h4 {
-  margin: 0;
-  color: #333;
-}
-
-/* Loading spinner */
-.loading-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 200px;
-}
-
-.loading-spinner {
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #007bff;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin-bottom: 10px;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.commandes-admin-container {
-  padding: 20px;
-  background-color: #f5f5f5;
-  min-height: 100vh;
-}
-
-.commandes-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding: 15px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.search-bar input {
-  padding: 8px 15px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  width: 300px;
-}
-
-.commandes-table-container {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow-x: auto;
-}
-
-.commandes-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-.commandes-table th,
-.commandes-table td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.commandes-table th {
-  background-color: #f8f9fa;
-  font-weight: 600;
-  color: #333;
-}
-
-.commandes-table tr:hover {
-  background-color: #f5f5f5;
-}
-
-.status-badge {
-  padding: 5px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.status-badge.pending {
-  background-color: #fff3cd;
-  color: #856404;
-}
-
-.status-badge.delivered {
-  background-color: #d4edda;
-  color: #155724;
-}
-
-.status-badge.cancelled {
-  background-color: #f8d7da;
-  color: #721c24;
-}
-
-.view-details-btn {
-  padding: 6px 12px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.view-details-btn:hover {
-  background-color: #0056b3;
-}
-
-.order-details-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: white;
-  border-radius: 8px;
-  width: 80%;
-  max-width: 800px;
-  max-height: 90vh;
-  overflow-y: auto;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #ddd;
-}
-
-.close-modal-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  color: #666;
-}
-
-.modal-body {
-  padding: 20px;
-}
-
-.order-info {
-  margin-bottom: 20px;
-}
-
-.order-info p {
-  margin: 5px 0;
-}
-
-.items-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 20px 0;
-}
-
-.items-table th,
-.items-table td {
-  padding: 10px;
-  border-bottom: 1px solid #ddd;
-  text-align: left;
-}
-
-.items-table th {
-  background-color: #f8f9fa;
-}
-
-.order-total {
-  text-align: right;
-  font-size: 18px;
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid #ddd;
-}
-
+/* Style pour le message de chargement */
 .loading {
   text-align: center;
   padding: 20px;
-  color: #666;
+  font-size: 1.1rem;
+  color: #333;
 }
-
-.error {
-  text-align: center;
-  padding: 20px;
-  color: #dc3545;
-}
-  

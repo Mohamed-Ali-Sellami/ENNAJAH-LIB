@@ -2,6 +2,10 @@ import React from 'react'
 import './styles/Section2.css'
 import banscolaire from './images/banscolaire.webp'
 import { Link } from 'react-router-dom'
+import accimg from './images/accessoires.png'
+import smartphonecard from './images/smartphonescard.png'
+import boxiptvcard from './images/boxandroid.png'
+import produitscolairecard from './images/produitscolairecard.png'
 
 const Section2 = () => {
   return (
@@ -14,38 +18,38 @@ const Section2 = () => {
         <div className="cards">
           <div className="card">
             <p className='sold'>-40%</p>
-            <img src="https://spacenet.tn/179460-large_default/micro-casque-bluetooth-jbl-tune-720bt-bleu.jpg" alt="casque"/>
-            <h3>Casques</h3>
-            <p>Differentes Casques et les kits chez nous.</p>
+            <img src= {accimg} alt="casque"/>
+            <h3>Accessoires Informatiques</h3>
+            <p>Découvrez notre large gamme d’accessoires informatiques.</p>
             <p>A partir de 25 TND</p>
-            <button className="button-s3">Plus Details</button>
+            <Link to="/accessoires"><button className="button-s3">Plus Details</button></Link>
           </div>
           
           <div className="card">
-            <p className='sold'>-50%</p>
-            <img src="https://www.istore.com.tn/1786-large_default/belkin-cable-usb-c-vers-usb-a-boost-charge-3-m-noir.jpg" alt='cables'/>
-            <h3>Cables</h3>
-            <p>Differents Cables Mobile, TV, PCs</p>
-            <p>A partir de 10 TND</p>
-            <button className="button-s3">Plus Details</button>
+            <p className='sold'>-25%</p>
+            <img src={smartphonecard} alt='cables'/>
+            <h3>Smartphones</h3>
+            <p>Les derniers modèles de smartphones à prix compétitifs.</p>
+            <p>A partir de 199 TND</p>
+            <Link to="/smartphones"><button className="button-s3">Plus Details</button></Link>
           </div>
           
           <div className="card">
             <p className='sold'>-30%</p>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwKaa9IG2qWAqVR335x2WWL3Da-_Mhtem2gA&s" alt='gsm'/>
-            <h3>Vente Smartphones et GSM</h3>
-            <p>Vente Smartphones et Simple Telephones</p>
+            <img src={boxiptvcard} alt='gsm'/>
+            <h3> Box & IPTV</h3>
+            <p>Profitez d’un large choix d’ IPTV pour tous les goûts.</p>
             <p>A partir de 50 TND</p>
-            <button className="button-s3">Plus Details</button>
+            <Link to="/iptv"><button className="button-s3">Plus Details</button> </Link>
           </div>
           
           <div className="card">
             <p className='sold'>-30%</p>
-            <img src="https://www.sbsinformatique.com/3597/tunisie/home/souris-gamer-razer-deathadder-v2-tunisie.jpg" alt='souris'/>
-            <h3>Vente Differentes Accessoires informatiques</h3>
-            <p>Vente plusieures Accessoires tels que souris, claviers, ...</p>
+            <img src={produitscolairecard} alt='souris'/>
+            <h3>Produits Scolaires</h3>
+            <p>Tout le nécessaire pour la rentrée : qualité et petits prix garantis. </p>
             <p>A partir de 15 TND</p>
-            <button className="button-s3">Plus Details</button>
+             <Link to="/produitsscolaire"> <button className="button-s3">Plus Details</button> </Link>
           </div>
         </div>
       </div>

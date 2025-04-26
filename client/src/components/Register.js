@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userRegister } from "../JS/userSlice";
+import Navbar from "./Navbar";
 
 const Register = () => {
   const [register, setRegister] = useState({
@@ -31,6 +32,7 @@ const Register = () => {
 
   return (
     <div>
+      <Navbar/>
       <div className="wrapper">
         <form onSubmit={handleSubmit} className="form-signin">
           <h2 className="form-signin-heading">Please register</h2>

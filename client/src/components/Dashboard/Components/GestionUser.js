@@ -125,7 +125,7 @@ const GestionUser = () => {
                                 <td data-label="Actions">
                                     <div className="settingsadmin">
                                         <button className="deletebtn" onClick={() => handleDelete(user?._id)}>Delete</button>
-                                        <button className="updatebtn" onClick={() => handleUpdateClick(user)}>Modifier</button>
+                                        <button className="updatebtn" onClick={() => handleUpdateClick(user)}>Update</button>
                                     </div>
                                 </td>
                             </tr>
