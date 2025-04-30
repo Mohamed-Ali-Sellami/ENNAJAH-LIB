@@ -20,7 +20,10 @@ import Shoppingcard from "./components/Shoppingcard";
 import HomeAdmin from "./components/Dashboard/Components/HomeAdmin";
 import GestionUser from "./components/Dashboard/Components/GestionUser";
 import GestiondesProduits from "./components/Dashboard/Components/GestiondesProduits";
-import CommandesAdmin from "./components/Dashboard/Components/CommandesAdmin";
+import Commandes from "./components/Dashboard/Components/Commandes";
+import { getAllOrders } from "./JS/orderSlice";
+import { getclient } from "./JS/clientSlice";
+
 
 function App() {
   const isAuth = localStorage.getItem("token");
@@ -35,6 +38,9 @@ function App() {
   useEffect(() => {
     dispatch(getproduct())
     
+           dispatch(getAllOrders());
+           dispatch(getclient());
+       
     
    
    
@@ -78,7 +84,8 @@ function App() {
           <Route path="/Dashboard" element={<HomeAdmin />} />
           <Route path="/gestionusers" element={<GestionUser />} />
           <Route path="/gestionproduits" element={<GestiondesProduits />} />
-          <Route path="/commandes" element={<CommandesAdmin />} />
+          <Route path="/commandes" element={<Commandes />} />
+          
           
         </Route>{" "}
 

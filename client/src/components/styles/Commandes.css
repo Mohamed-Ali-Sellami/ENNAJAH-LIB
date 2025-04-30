@@ -1,0 +1,37 @@
+.commandes-container {
+    padding: 20px;
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .commandes-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .commandes-table th,
+  .commandes-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .commandes-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .commandes-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .commandes-table tr:hover {
+    background-color: #ececec;
+  }
+  
+  .article-item {
+    margin-bottom: 5px;
+  }
+  
