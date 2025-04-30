@@ -1,37 +1,192 @@
+/* Commandes.css */
+
 .commandes-container {
-    padding: 20px;
-  }
-  
-  h1 {
-    text-align: center;
-    margin-bottom: 20px;
+  padding: 2rem;
+  max-width: 95%;
+  margin: 0 auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 80px;
+}
+
+.commandes-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+  font-size: 2.2rem;
+  font-weight: 600;
+}
+
+.commandes-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  table-layout: fixed;
+}
+
+.commandes-table thead tr {
+  background-color: #3498db;
+  color: white;
+  text-align: left;
+}
+
+.commandes-table th {
+  padding: 1rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+.commandes-table td {
+  padding: 0.8rem 1rem;
+  vertical-align: top;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Largeurs des colonnes */
+.commandes-table th:nth-child(1),
+.commandes-table td:nth-child(1) {
+  width: 18%; /* Nom Client */
+}
+
+.commandes-table th:nth-child(2),
+.commandes-table td:nth-child(2) {
+  width: 18%; /* Mobile */
+}
+
+.commandes-table th:nth-child(3),
+.commandes-table td:nth-child(3) {
+  width: 18%; /* Adresse */
+}
+
+.commandes-table th:nth-child(4),
+.commandes-table td:nth-child(4) {
+  width: 10%; /* Date */
+}
+
+.commandes-table th:nth-child(5),
+.commandes-table td:nth-child(5) {
+  width: 8%; /* Statut */
+  text-align: center;
+}
+
+.commandes-table th:nth-child(6),
+.commandes-table td:nth-child(6) {
+  width: 10%; /* Prix Total */
+  text-align: right;
+}
+
+.commandes-table th:nth-child(7),
+.commandes-table td:nth-child(7) {
+  width: 34%; /* Articles */
+}
+
+.commandes-table tbody tr:nth-of-type(even) {
+  background-color: #f8f9fa;
+}
+
+.commandes-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.commandes-table tbody tr:hover {
+  background-color: #f1f9ff;
+}
+
+/* Styles spécifiques pour le contenu */
+.article-item {
+  padding: 0.3rem 0;
+  border-bottom: 1px dashed #e0e0e0;
+  font-size: 0.9rem;
+}
+
+.article-item:last-child {
+  border-bottom: none;
+}
+
+/* Style du statut */
+.status-delivered {
+  color: #27ae60;
+  font-weight: 500;
+  background-color: #e8f5e9;
+  padding: 0.3rem 0.5rem;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.status-pending {
+  color: #e74c3c;
+  font-weight: 500;
+  background-color: #ffebee;
+  padding: 0.3rem 0.5rem;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+/* Style du prix */
+.price {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .commandes-container {
+    padding: 1rem;
+    max-width: 100%;
   }
   
   .commandes-table {
-    width: 100%;
-    border-collapse: collapse;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
   
   .commandes-table th,
   .commandes-table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: center;
+    min-width: 120px;
   }
-  
-  .commandes-table th {
-    background-color: #f4f4f4;
-  }
-  
-  .commandes-table tr:nth-child(even) {
-    background-color: #f9f9f9;
-  }
-  
-  .commandes-table tr:hover {
-    background-color: #ececec;
-  }
-  
-  .article-item {
-    margin-bottom: 5px;
-  }
-  
+}
+
+/* Loading spinner */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 3rem auto;
+}
+
+/* Messages */
+.error-message {
+  color: #e74c3c;
+  background-color: #fadbd8;
+  padding: 1.2rem;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 600px;
+  margin: 2rem auto;
+  font-weight: 500;
+}
+
+.no-orders {
+  text-align: center;
+  color: #7f8c8d;
+  font-size: 1.2rem;
+  margin-top: 3rem;
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}

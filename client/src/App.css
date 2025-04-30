@@ -363,6 +363,7 @@ body {
 /********************************Gestion users***************************/
 /* Container principal */
 .box-gestionuserdash {
+    margin-top: 80px;
   padding: 2rem;
   background-color: #f9f9f9;
   border-radius: 16px;

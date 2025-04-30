@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllOrders } from "../../../JS/orderSlice"; // ajuste le chemin si besoin
+import { getAllOrders } from "../../../JS/orderSlice";
 import Navbardash from "./Navbardash";
-import "../../styles/Commandes.css"; // nouveau fichier css simple
+import "../../styles/Commandes.css";
 
 const Commandes = () => {
   const dispatch = useDispatch();
@@ -12,11 +12,27 @@ const Commandes = () => {
     dispatch(getAllOrders());
   }, [dispatch]);
 
-  if (loading) return <p>Chargement...</p>;
-  if (error) return <p>Erreur: {error}</p>;
+  if (loading) return (
+    <div>
+      <Navbardash />
+      <div className="loading-spinner"></div>
+    </div>
+  );
+  
+  if (error) return (
+    <div>
+      <Navbardash />
+      <div className="error-message">Erreur: {error}</div>
+    </div>
+  );
 
   if (!orders.length) {
-    return <p>Aucune commande trouvée.</p>;
+    return (
+      <div>
+        <Navbardash />
+        <p className="no-orders">Aucune commande trouvée.</p>
+      </div>
+    );
   }
 
   return (
@@ -43,12 +59,14 @@ const Commandes = () => {
                 <td>{order.userId?.mobile}</td>
                 <td>{order.userId?.Address}</td>
                 <td>{new Date(order.orderDate).toLocaleDateString()}</td>
-                <td>{order.isDelivered}</td>
-                <td>{order.totalPrice.toFixed(2)} €</td>
+                <td style={{ color: order.isDelivered ? '#27ae60' : '#e74c3c' }}>
+                  {order.isDelivered ? 'Livré' : 'En cours'}
+                </td>
+                <td>{order.totalPrice.toFixed(2)} TND </td>
                 <td>
                   {order.orderItems.map((item, index) => (
                     <div key={index} className="article-item">
-                      {item.name} (x{item.cartQuantity})
+                      {item.name} (x{item.cartQuantity}) - {item.price.toFixed(2)} TND - 
                     </div>
                   ))}
                 </td>
