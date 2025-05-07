@@ -24,6 +24,7 @@ import GestiondesProduits from "./components/Dashboard/Components/GestiondesProd
 import Commandes from "./components/Dashboard/Components/Commandes";
 import { getAllOrders } from "./JS/orderSlice";
 import { getclient } from "./JS/clientSlice";
+import Productdetails from "./components/Productdetails";
 
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
         <Route path="/smartphones" element={<Smartphones />} />
         <Route path="/produitsscolaire" element={<Produitscolaire />} />
         <Route path="/iptv" element={<IPTV />} />
+        <Route path="/product/:id" element={<Productdetails />} />
         
         
 

@@ -52,10 +52,23 @@ export const updateproduct=createAsyncThunk('/updateproduct',async({id,upproduct
   }
   })
 
+///////////////////////////fetch by id//////////////////////////////////////////////////////
+  export const fetchProductById = createAsyncThunk(
+    'products/fetchProductById',
+    async (id) => {
+      const res = await axios.get(`http://localhost:5800/product/${id}`);
+return res.data.product;
+
+    }
+  );
+
 
 const initialState = {
     product:null,
     status:null ,
+    selectedProduct: null,
+    loading: false,
+    error: null,
 
 }
 
@@ -126,7 +139,18 @@ state.product=action.payload?.data?.product ;
       
           state.status="fail";
       })
-  
+  //fetch by id 
+  .addCase(fetchProductById.pending, (state) => {
+    state.loading = true;
+  })
+  .addCase(fetchProductById.fulfilled, (state, action) => {
+    state.loading = false;
+    state.selectedProduct = action.payload;
+  })
+  .addCase(fetchProductById.rejected, (state, action) => {
+    state.loading = false;
+    state.error = action.error.message;
+  })
 
 
 

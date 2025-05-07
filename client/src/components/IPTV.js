@@ -9,7 +9,8 @@ const IPTV = () => {
 
     const allproducts = useSelector((store)=>store.Product?.product)
     console.log("voici all products",allproducts)
-     const  iptv = allproducts.filter((data) => data?.Category === "IPTV");
+    const iptv = Array.isArray(allproducts) ? allproducts.filter((data) => data?.Category === "IPTV") : [];
+
      console.log(iptv)
 
   return (

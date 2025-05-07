@@ -1,59 +1,79 @@
-import React from "react";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import "./styles/Banniere.css"; // Ajout d'un fichier CSS personnalisé
+import { useState, useEffect } from 'react';
+import './styles/Banniere.css';
 
-const Banniere = () => {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
-    arrows: true,
+// Images importées depuis le dossier components/image
+import bann1 from '../components/images/bann1.jpg';
+import bann2 from '../components/images/bann2.jpg';
+
+function Banniere() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const images = [bann1, bann2];
+
+  // Fonction pour aller à l'image suivante
+  const nextSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  const slides = [
-    {
-      image:
-        "https://www.gnet.tn/wp-content/uploads/2024/09/banner-1920-x-567.png",
-      title: "Pointe de Vente Globalnet",
-      text: "Chez Librairie Ennajah et avec GlobalNet, vivez l'internet chez vous sans limite.",
-    },
-    {
-      image:"https://www.ooredoo.tn/Personal/themes/leo_epharma/assets/img/modules/leoslideshow/1920x600-5G-INSTIT.png",
-      title: "Pointe de Vente Ooredoo ",
-      text: "Tous les Services Ooredoo chez Nous ",
-    },
-    
-    {
-      image:
-        "https://www.leparisien.fr/resizer/P6QQIiknesQOfR4y_qZAmOmWbTg=/932x582/cloudfront-eu-central-1.images.arcpublishing.com/leparisien/RKH34U6CMG6KWZBVUU7TN7EXHY.jpg",
-      title: "IPTV & Box android & Recepteurs ",
-      text: "Vente IPTV et produits numeriques avec des offres exceptionnelles",
-    },
-  ];
+  // Fonction pour aller à l'image précédente
+  const prevSlide = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+  };
 
-  
+  // Changement automatique d'image toutes les 5 secondes
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="carousel-container">
-      <Slider {...settings}>
-        {slides.map((slide, index) => (
-          <div key={index} className="carousel-item">
-            <img src={slide.image} alt={`Slide ${index + 1}`} />
-            <div className="carousel-text">
-              <h2>{slide.title}</h2>
-              <p>{slide.text}</p>
-            </div>
+      {/* Conteneur du carrousel */}
+      <div className="carousel-slides">
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`carousel-slide ${index === currentIndex ? 'active' : ''}`}
+          >
+            <img
+              src={image}
+              alt={`Bannière ${index + 1}`}
+              className="carousel-image"
+            />
           </div>
         ))}
-      </Slider>
+      </div>
+      
+      {/* Boutons de navigation */}
+      <div className="carousel-controls">
+        <button
+          onClick={prevSlide}
+          className="carousel-button prev"
+        >
+          &lt;
+        </button>
+        <button
+          onClick={nextSlide}
+          className="carousel-button next"
+        >
+          &gt;
+        </button>
+      </div>
+      
+      {/* Indicateurs de position */}
+      <div className="carousel-indicators">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            className={`carousel-indicator ${index === currentIndex ? 'active' : ''}`}
+          />
+        ))}
+      </div>
     </div>
   );
-};
+}
 
 export default Banniere;

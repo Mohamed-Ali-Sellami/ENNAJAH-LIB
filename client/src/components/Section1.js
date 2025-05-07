@@ -13,7 +13,7 @@ const Section1 = () => {
             votre contenu et personnaliser la police. C'est l'espace idéal pour 
             raconter une histoire et vous présenter à vos visiteurs.
           </p>
-          <button className="buy-button1">ACHETER &gt;</button>
+          <button className="buy-button1">Plus Details &gt;</button>
         </div>
         <div className="image-container1">
           <img 

@@ -8,7 +8,7 @@ const Smartphones = () => {
 
   const allproducts = useSelector((store)=>store.Product?.product)
     console.log("voici all products",allproducts)
-     const  smartphones = allproducts.filter((data) => data?.Category === "smartphones");
+     const smartphones = Array.isArray(allproducts) ? allproducts.filter((data) => data?.Category === "smartphones") : [];
      console.log(smartphones)
   return (
     <div>

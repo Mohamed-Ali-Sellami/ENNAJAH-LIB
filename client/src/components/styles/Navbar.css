@@ -1,3 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .navbar {
   background: white;
   padding: 0;
@@ -135,6 +146,7 @@
 
 .bars-mobile {
   display: none;
+  margin-left: auto;
 }
 
 /* Search Bar */
@@ -193,6 +205,66 @@
   font-size: 16px;
  margin-right: 15px ;
 }
+.search-results-modal {
+  position: absolute;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  width:530px;
+  max-height: 400px;
+  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0px 5px 15px rgba(0,0,0,0.3);
+  z-index: 999;
+  padding: 10px;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.result-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.result-info {
+  flex-grow: 1;
+  margin-left: 10px;
+}
+
+.result-name {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.result-price {
+  font-size: 14px;
+  color: gray;
+}
+
+.voir-button {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+
+
+
+
+/****************************************/
 
 .mobile-menu-btn11 {
   display: none;
@@ -273,23 +345,13 @@
 }
 
 /* Responsive Styles */
-@media (max-width: 1024px) {
-  .nav-links {
-    gap: 1rem;
-  }
-
-  .nav-buttons {
-    gap: 0.5rem;
-  }
-
-  .btnrg {
-    padding: 0.5rem 0.75rem;
-    font-size: 0.9rem;
-    border-radius: 25px;
-  }
-}
 
 @media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+    flex-direction: column;
+  }
+
   .navbar-bottom {
     display: none;
   }
@@ -298,13 +360,13 @@
     display: none;
   }
 
-  .navbar {
-    padding: 1rem;
+  .search-container {
+    display: none;
   }
 
   .bars-mobile {
     display: block;
-    position: absolute;
+    position: absolute; 
     top: 20px;
     right: 20px;
     z-index: 1100;
@@ -312,10 +374,10 @@
 
   .mobile-menu-btn11 {
     display: block;
-  }
-
-  .search-container {
-    display: none;
+    position: absolute; 
+    top: 10px;
+    left: 170px;
+    z-index: 1100;
   }
 
   .navbar-logo img {
@@ -327,6 +389,7 @@
 @media (max-width: 480px) {
   .navbar-logo img {
     width: 80px;
+    height: auto;
   }
 
   .nav-content {
@@ -334,7 +397,7 @@
   }
 
   .nav-item a {
-    font-size: 16px;
-    padding: 12px;
+    font-size: 14px; /* légèrement réduit pour mobile */
+    padding: 10px;
   }
 }

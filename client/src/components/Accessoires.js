@@ -9,7 +9,7 @@ const Accessoires = () => {
 
   const allproducts = useSelector((store)=>store.Product?.product)
     console.log("voici all products",allproducts)
-     const  accessoires = allproducts.filter((data) => data?.Category === "Accessoires");
+     const accessoires = Array.isArray(allproducts) ? allproducts.filter((data) => data?.Category === "Accessoires") : [];
      console.log(accessoires)
 
   return (

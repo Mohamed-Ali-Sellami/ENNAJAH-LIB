@@ -1,77 +1,111 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles/Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import imglogo from "./images/logo.png";
 import { logout } from "../JS/userSlice";
+import axios from "axios";
 
 function Navbar({ hideAuthButtons }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.user);
   const isAuth = localStorage.getItem("token");
+  const { cartTotalQuantity } = useSelector((state) => state.cart);
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const {cartTotalQuantity} = useSelector((state) => state.cart)
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value);
-  };
-  
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-  
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [showResults, setShowResults] = useState(false);
 
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const handleLogout = () => {
-    // Supprimer les données de l'utilisateur
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("cartItems");
-    
-    // Déconnecter l'utilisateur dans Redux
     dispatch(logout());
-    
-    // Rediriger vers la page de connexion
     navigate("/login");
   };
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
+  const handleSearchChange = async (e) => {
+    const value = e.target.value;
+    setSearchQuery(value);
+
+    if (value.trim() === "") {
+      setFilteredResults([]);
+      setShowResults(false);
+    } else {
+      try {
+        const { data } = await axios.get("http://localhost:5800/product/all");
+        const products = data.product;
+        const filtered = products.filter((p) =>
+          p.name.toLowerCase().includes(value.toLowerCase())
+        );
+        setFilteredResults(filtered);
+        setShowResults(true);
+      } catch (error) {
+        console.error("Erreur lors de la récupération des produits :", error);
+      }
+    }
   };
 
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    console.log("Recherche:", searchQuery);
+  const handleSearchClick = () => {
+    setShowResults(false);
+    setSearchQuery("");
   };
 
   return (
     <header id="header">
       <nav className="navbar">
-        {/* First row: logo, search bar, and icons */}
+        {/* Première ligne */}
         <div className="navbar-top">
           <div className="navbar-logo">
-            <img src={imglogo} alt="Logo" />
+          <Link to="/"><img src={imglogo} alt="Logo" /> </Link>
           </div>
 
           {/* Barre de recherche */}
-          <form className="search-container" onSubmit={handleSearchSubmit}>
-  <div className="search-box">
-    <input
-      type="text"
-      className="search-input"
-      placeholder="Rechercher un produit..."
-      value={searchQuery}
-      onChange={handleSearchChange}
-    />
-    <button type="submit" className="search-button">
-      <i className="fas fa-search"></i>
-    </button>
-  </div>
-</form>
+          <div className="search-container">
+            <div className="search-box">
+              <input
+                type="text"
+                className="search-input"
+                placeholder="Rechercher un produit..."
+                value={searchQuery}
+                onChange={handleSearchChange}
+              />
+              <button type="button" className="search-button">
+                <i className="fas fa-search"></i>
+              </button>
+            </div>
+
+            {showResults && filteredResults.length > 0 && (
+              <div className="search-results-modal">
+                {filteredResults.map((product) => (
+                  <div key={product._id} className="search-result-item">
+                    <img
+                      src={product.Image}
+                      alt={product.name}
+                      className="result-image"
+                    />
+                    <div className="result-info">
+                      <p className="result-name">{product.name}</p>
+                      <p className="result-price">{product.price} TND</p>
+                    </div>
+                    <Link to={`/product/${product._id}`}>
+                      <button className="voir-button" onClick={handleSearchClick}>
+                        Voir
+                      </button>
+                    </Link>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
 
 
 
-
+          {/* Navbar-icones */}
           <div className="navbar-icons">
             <i className="fa-solid fa-user">
               <Link
@@ -85,12 +119,14 @@ function Navbar({ hideAuthButtons }) {
               <Link to="/shoppingcard" className="iconpanier">
                 Panier
               </Link>
-              <p className="quantity"> {cartTotalQuantity} </p>
+              <p className="quantity">{cartTotalQuantity}</p>
             </i>
           </div>
         </div>
 
-        {/* Second row: navigation links */}
+        
+
+        {/* Deuxième ligne */}
         <div className="navbar-bottom">
           <ul className="liste">
             <li>
@@ -108,10 +144,13 @@ function Navbar({ hideAuthButtons }) {
             <li>
               <Link to="/iptv">IPTV & Récepteurs</Link>
             </li>
-
             {isAuth && (
               <li>
-                <Link to="/login" onClick={handleLogout} className="deconnexion-link">
+                <Link
+                  to="/login"
+                  onClick={handleLogout}
+                  className="deconnexion-link"
+                >
                   Déconnexion
                 </Link>
               </li>
@@ -119,7 +158,7 @@ function Navbar({ hideAuthButtons }) {
           </ul>
         </div>
 
-        {/* Menu Hamburger */}
+        {/* Menu Hamburger (mobile) */}
         <div className="bars-mobile">
           <button
             className={`mobile-menu-btn11 ${isMenuOpen ? "active" : ""}`}
@@ -157,10 +196,13 @@ function Navbar({ hideAuthButtons }) {
                   IPTV & Récepteurs
                 </Link>
               </div>
-
               {isAuth && (
                 <div className="nav-item">
-                  <Link to="/login" onClick={handleLogout} className="deconnexion-link">
+                  <Link
+                    to="/login"
+                    onClick={handleLogout}
+                    className="deconnexion-link"
+                  >
                     Déconnexion
                   </Link>
                 </div>

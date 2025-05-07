@@ -51,3 +51,27 @@ h3 {
 .buy-btn:hover {
     background: #0077cc;
 }
+.description.collapsed {
+    
+        display: -webkit-box;
+        -webkit-line-clamp: 4;     /* WebKit-specific */
+        line-clamp: 4;             /* Standard syntax (limited support) */
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      
+      
+  }
+  
+  .description.expanded {
+    display: block;
+  }
+  
+  .toggle-description {
+    background: none;
+    border: none;
+    color: #007bff;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+  
