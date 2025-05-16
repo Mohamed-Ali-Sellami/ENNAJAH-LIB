@@ -1,90 +1,72 @@
-/* Login.css */
+.login-wrapper {
+  font-family: 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: #f4f6f8;
+  min-height: 80vh;
+}
+
+.form-signin {
+  background: white;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.login-logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.form-signin-heading {
+  margin-bottom: 25px;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+}
 
 
-  
-  .wrapper {
-    width: 100%;
-    max-width: 400px;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    margin-left: 550px;
-    margin-top: 50px;
-  }
-  
-  .form-signin {
+  .checkbox-wrapper {
     display: flex;
-    flex-direction: column;
-  
-  }
-  
-  .form-signin-heading {
-    text-align: center;
-    margin-bottom: 20px;
-    font-size: 24px;
+    align-items: center;
+   
+    margin: 10px 0 20px;
+    font-size: 14px;
     color: #333;
   }
   
-  .form-control {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
-  }
-  
-  .form-control:focus {
-    border-color: #034878;
-    outline: none;
-  }
-  
-  .checkbox {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-    font-size: 14px;
-    color: #555;
-  }
-  
-  .checkbox input {
-    margin-right: 10px;
-  }
-  
-  .btnlog {
-    width: 100%;
-    padding: 10px;
-    background-color: #113ccb;
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .btnlog:hover {
-    background-color: #2575fc;
-  }
-  
-  .btnlog:active {
-    background-color: #1a5bbf;
-  }
-  
-  .btnlog-block {
-    display: block;
-    width: 100%;
-  }
-  
-  .link {
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-    color: #2575fc;
-    text-decoration: none;
-  }
-  
-  .link:hover {
-    text-decoration: underline;
-  }
+
+
+.btnlog {
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btnlog:hover {
+  background-color: #0056b3;
+}
+
+.register-link {
+  margin-top: 20px;
+  font-size: 14px;
+}

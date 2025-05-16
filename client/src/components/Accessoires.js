@@ -16,7 +16,7 @@ const Accessoires = () => {
     <div>
     <Navbar/>
        <div className='content1'>
-      <h1> Liste Accessoires</h1>
+      <h1> Liste Accessoires informatiques</h1>
 
       {/* <div className='search-container'>
       <input type="text" placeholder="Search Smartphones" name="search"/>

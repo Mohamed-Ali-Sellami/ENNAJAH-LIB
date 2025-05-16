@@ -13,7 +13,7 @@ const Section2 = () => {
       <div className="container3">
         <h2 className="titles2">Différents Outils Informatiques chez Nous</h2>
        
-        <p> La Librairie Ennajah propose une large gamme d’accessoires informatiques et de smartphones de qualité. Chaque mois, profitez de promotions exclusives sur nos produits pour vous équiper au meilleur prix ! </p>
+        <p> La Librairie Ennajah vous propose un large choix de produits scolaires, accessoires informatiques, smartphones, téléphones GSM et box IPTV Android.<br/> Profitez chaque mois de promotions exclusives pour vous équiper au meilleur prix ! </p>
         
         <div className="cards">
           <div className="card">

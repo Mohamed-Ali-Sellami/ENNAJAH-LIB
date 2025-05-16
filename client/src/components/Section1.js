@@ -1,5 +1,6 @@
 import React from 'react';
 import './styles/Section1.css';
+import { Link } from 'react-router-dom';
 
 const Section1 = () => {
   return (
@@ -13,7 +14,7 @@ const Section1 = () => {
             votre contenu et personnaliser la police. C'est l'espace idéal pour 
             raconter une histoire et vous présenter à vos visiteurs.
           </p>
-          <button className="buy-button1">Plus Details &gt;</button>
+         <a href="http://localhost:3000/product/673b16336f8fc36e993eb886" target="_blank" rel="noreferrer"> <button className="buy-button1">Plus Details &gt;</button></a>
         </div>
         <div className="image-container1">
           <img 

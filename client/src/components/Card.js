@@ -1,15 +1,52 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addToCart } from '../JS/cartSlice';
+import { NotificationManager } from "react-notifications"; 
 import "./styles/Card.css";
 
 const Card = ({ data }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showFullDescription, setShowFullDescription] = useState(false);
+  
+  // Obtenir l'état complet du store pour déboguer
+  const state = useSelector((state) => state);
+  
+  // Vérifier si l'utilisateur est connecté en fonction de votre logique d'authentification
+  // Vous devez adapter cette logique à votre application
+  const checkIfUserIsLoggedIn = () => {
+    // Si vous avez un token dans localStorage, l'utilisateur est probablement connecté
+    const token = localStorage.getItem('token') || localStorage.getItem('userToken');
+    
+    // Si vous avez un user ou userId dans localStorage, l'utilisateur est probablement connecté
+    const user = localStorage.getItem('user');
+    const userId = localStorage.getItem('userId');
+    
+    // Si vous avez un state.auth dans Redux, utilisez-le pour vérifier
+    // l'authentification (décommentez et adaptez si c'est votre cas)
+    // const authState = state.auth;
+    // if (authState && (authState.isAuthenticated || authState.token || authState.user)) {
+    //   return true;
+    // }
+    
+    return !!token || !!user || !!userId;
+  };
+  
+  const isAuthenticated = checkIfUserIsLoggedIn();
 
   const handleAddToCart = (product) => {
+    // Vérifier si l'utilisateur est authentifié avant d'ajouter au panier
+    if (!isAuthenticated) {
+      // Afficher une notification d'information au lieu d'une notification de succès
+      NotificationManager.info("Veuillez vous connecter pour ajouter des produits au panier", "Connexion requise");
+      
+      // Rediriger vers la page de connexion
+      navigate("/login");
+      return;
+    }
+    
+    // L'utilisateur est connecté, on peut ajouter le produit au panier
     dispatch(addToCart(product));
     navigate("/shoppingcard");
   };

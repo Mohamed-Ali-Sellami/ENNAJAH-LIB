@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userRegister } from "../JS/userSlice";
 import Navbar from "./Navbar";
+import './styles/Register.css';
+import imglogo from '../components/images/logo.png'
 
 const Register = () => {
   const [register, setRegister] = useState({
@@ -31,33 +33,39 @@ const Register = () => {
   }, [status, user, navigate]);
 
   return (
-    <div>
-      <Navbar/>
-      <div className="wrapper">
-        <form onSubmit={handleSubmit} className="form-signin">
-          <h2 className="form-signin-heading">Please register</h2>
+    <div className="register-page">
+      <Navbar />
+      <div className="register-container">
+        <form onSubmit={handleSubmit} className="register-form">
+          <img src={imglogo} alt="Logo" className="register-logo" />
+          <h2 className="register-title">Créer Votre Compte !</h2>
 
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Name"
-            required
-            value={register.name}
-            onChange={(e) => setRegister({ ...register, name: e.target.value })}
-          />
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Last Name"
-            required
-            value={register.lastname}
-            onChange={(e) =>
-              setRegister({ ...register, lastname: e.target.value })
-            }
-          />
+          <div className="input-group">
+            Name :
+            <input
+              type="text"
+              className="register-input"
+              placeholder="First Name"
+              required
+              value={register.name}
+              onChange={(e) => setRegister({ ...register, name: e.target.value })}
+            />
+            Prénom :
+            <input
+              type="text"
+              className="register-input"
+              placeholder="Last Name"
+              required
+              value={register.lastname}
+              onChange={(e) =>
+                setRegister({ ...register, lastname: e.target.value })
+              }
+            />
+          </div>
+          Email :
           <input
             type="email"
-            className="form-control"
+            className="register-input"
             placeholder="Email Address"
             required
             value={register.email}
@@ -65,9 +73,10 @@ const Register = () => {
               setRegister({ ...register, email: e.target.value })
             }
           />
+          Mode de passe :
           <input
             type="password"
-            className="form-control"
+            className="register-input"
             placeholder="Password"
             required
             value={register.password}
@@ -75,9 +84,10 @@ const Register = () => {
               setRegister({ ...register, password: e.target.value })
             }
           />
+           Addresse :
           <input
             type="text"
-            className="form-control"
+            className="register-input"
             placeholder="Address"
             required
             value={register.Address}
@@ -85,10 +95,11 @@ const Register = () => {
               setRegister({ ...register, Address: e.target.value })
             }
           />
+           Telephone :
           <input
-            type="text"
-            className="form-control"
-            placeholder="Mobile Phone"
+            type="tel"
+            className="register-input"
+            placeholder="Phone Number"
             required
             value={register.mobile}
             onChange={(e) =>
@@ -98,17 +109,23 @@ const Register = () => {
 
           <button
             type="submit"
-            className="btn btn-lg btn-primary btn-block"
+            className="buttonregister"
             disabled={status === "loading"}
           >
-            {status === "loading" ? "Processing..." : "Register"}
+            {status === "loading" ? (
+              <span className="button-spinner">Processing...</span>
+            ) : (
+              "Register Now"
+            )}
           </button>
 
-          {status === "failed" && <p style={{ color: "red" }}>❌ {error}</p>}
+          {status === "failed" && (
+            <p className="register-error">❌ {error}</p>
+          )}
 
-          <h5>
-            Already have an account? <Link to="/login">Sign in</Link>
-          </h5>
+          <p className="register-login-link">
+            Already have an account? <Link to="/login">Sign in here</Link>
+          </p>
         </form>
       </div>
     </div>

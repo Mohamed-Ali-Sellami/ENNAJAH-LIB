@@ -61,7 +61,7 @@ function Navbar({ hideAuthButtons }) {
         {/* Première ligne */}
         <div className="navbar-top">
           <div className="navbar-logo">
-          <Link to="/"><img src={imglogo} alt="Logo" /> </Link>
+            <Link to="/"><img src={imglogo} alt="Logo" /></Link>
           </div>
 
           {/* Barre de recherche */}
@@ -103,8 +103,6 @@ function Navbar({ hideAuthButtons }) {
             )}
           </div>
 
-
-
           {/* Navbar-icones */}
           <div className="navbar-icons">
             <i className="fa-solid fa-user">
@@ -122,9 +120,19 @@ function Navbar({ hideAuthButtons }) {
               <p className="quantity">{cartTotalQuantity}</p>
             </i>
           </div>
-        </div>
 
-        
+          {/* Menu Hamburger (mobile) */}
+          <div className="bars-mobile">
+            <button
+              className={`mobile-menu-btn11 ${isMenuOpen ? "active" : ""}`}
+              onClick={toggleMenu}
+            >
+              <span className="bar"></span>
+              <span className="bar"></span>
+              <span className="bar"></span>
+            </button>
+          </div>
+        </div>
 
         {/* Deuxième ligne */}
         <div className="navbar-bottom">
@@ -158,56 +166,69 @@ function Navbar({ hideAuthButtons }) {
           </ul>
         </div>
 
-        {/* Menu Hamburger (mobile) */}
-        <div className="bars-mobile">
-          <button
-            className={`mobile-menu-btn11 ${isMenuOpen ? "active" : ""}`}
-            onClick={toggleMenu}
-          >
-            <span className="bar"></span>
-            <span className="bar"></span>
-            <span className="bar"></span>
-          </button>
+        {/* Menu Mobile */}
+        <div className={`nav-content ${isMenuOpen ? "active" : ""}`}>
+          
 
-          <div className={`nav-content ${isMenuOpen ? "active" : ""}`}>
-            <div className="nav-links">
-              <div className="nav-item">
-                <Link to="/" onClick={toggleMenu}>
-                  Acceuil
-                </Link>
-              </div>
-              <div className="nav-item">
-                <Link to="/produitsscolaire" onClick={toggleMenu}>
-                  Produits Scolaires
-                </Link>
-              </div>
-              <div className="nav-item">
-                <Link to="/accessoires" onClick={toggleMenu}>
-                  Accessoires Informatiques
-                </Link>
-              </div>
-              <div className="nav-item">
-                <Link to="/smartphones" onClick={toggleMenu}>
-                  Smartphones & GSM
-                </Link>
-              </div>
-              <div className="nav-item">
-                <Link to="/iptv" onClick={toggleMenu}>
-                  IPTV & Récepteurs
-                </Link>
-              </div>
-              {isAuth && (
-                <div className="nav-item">
-                  <Link
-                    to="/login"
-                    onClick={handleLogout}
-                    className="deconnexion-link"
-                  >
-                    Déconnexion
-                  </Link>
-                </div>
+          <div className="mobile-divider"></div>
+
+          {/* Mobile Icons */}
+          <div className="mobile-icons">
+            <div className="mobile-icon-item">
+              <i className="fa-solid fa-user"></i>
+              <Link to={user?.isAdmin ? "/dashboard" : "/profil"}>
+                Profil
+              </Link>
+            </div>
+            <div className="mobile-icon-item">
+              <i className="fa-solid fa-cart-shopping"></i>
+              <Link to="/shoppingcard">Panier</Link>
+              {cartTotalQuantity > 0 && (
+                <span className="mobile-quantity">{cartTotalQuantity}</span>
               )}
             </div>
+          </div>
+
+          <div className="mobile-divider"></div>
+
+          {/* Mobile Nav Links */}
+          <div className="nav-links">
+            <div className="nav-item">
+              <Link to="/" onClick={toggleMenu}>
+                Acceuil
+              </Link>
+            </div>
+            <div className="nav-item">
+              <Link to="/produitsscolaire" onClick={toggleMenu}>
+                Produits Scolaires
+              </Link>
+            </div>
+            <div className="nav-item">
+              <Link to="/accessoires" onClick={toggleMenu}>
+                Accessoires Informatiques
+              </Link>
+            </div>
+            <div className="nav-item">
+              <Link to="/smartphones" onClick={toggleMenu}>
+                Smartphones & GSM
+              </Link>
+            </div>
+            <div className="nav-item">
+              <Link to="/iptv" onClick={toggleMenu}>
+                IPTV & Récepteurs
+              </Link>
+            </div>
+            {isAuth && (
+              <div className="nav-item">
+                <Link
+                  to="/login"
+                  onClick={handleLogout}
+                  className="deconnexion-link"
+                >
+                  Déconnexion
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </nav>

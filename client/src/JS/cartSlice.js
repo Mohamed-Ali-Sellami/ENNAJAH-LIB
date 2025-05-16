@@ -1,3 +1,4 @@
+// cartSlice.js modifié
 import { createSlice } from "@reduxjs/toolkit";
 import { NotificationManager } from "react-notifications"; 
 import "react-notifications/lib/notifications.css"; 
@@ -8,6 +9,7 @@ const initialState = {
     : [],
   cartTotalQuantity: 0,
   cartTotalAmount: 0,
+  requireAuth: false,  // Nouvel état pour gérer la redirection
 };
 
 const cartSlice = createSlice({
@@ -16,6 +18,16 @@ const cartSlice = createSlice({
   reducers: {
     // Add to shopping cart
     addToCart(state, action) {
+      // Vérification si un flag d'authentification est passé
+      if (action.payload.requireAuth === true) {
+        state.requireAuth = true;
+        // Pas de notification ici car l'utilisateur n'est pas authentifié
+        return;
+      }
+
+      // Reset requireAuth flag si l'utilisateur est authentifié
+      state.requireAuth = false;
+      
       const existingIndex = state.cartItems.findIndex(
         (item) => item._id === action.payload._id
       );
@@ -34,7 +46,12 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
-    // Decrease quantity of product
+    // Reset requireAuth flag après redirection
+    resetAuthRequirement(state) {
+      state.requireAuth = false;
+    },
+
+    // Les autres reducers restent inchangés
     decreaseCart(state, action) {
       const itemIndex = state.cartItems.findIndex(
         (item) => item._id === action.payload._id
@@ -52,7 +69,6 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
-    // Remove product from shopping cart
     removeFromCart(state, action) {
       state.cartItems = state.cartItems.filter(
         (item) => item._id !== action.payload._id
@@ -61,7 +77,6 @@ const cartSlice = createSlice({
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
 
-    // Get total price and quantity
     getTotals(state) {
       let { total, quantity } = state.cartItems.reduce(
         (cartTotal, cartItem) => {
@@ -83,16 +98,21 @@ const cartSlice = createSlice({
       state.cartTotalAmount = total;
     },
 
-    // Clear the cart
     clearCart(state) {
       state.cartItems = [];
-      NotificationManager.success("Panier vide Maintenant !",);
+      NotificationManager.success("Panier vide Maintenant !");
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
   },
 });
 
-export const { addToCart, decreaseCart, removeFromCart, getTotals, clearCart } =
-  cartSlice.actions;
+export const { 
+  addToCart, 
+  decreaseCart, 
+  removeFromCart, 
+  getTotals, 
+  clearCart,
+  resetAuthRequirement
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
