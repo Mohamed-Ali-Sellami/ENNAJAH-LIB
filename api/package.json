@@ -6,7 +6,9 @@
   "scripts": {
     "client": "cd client && npm start",
     "back": "nodemon server.js",
-    "dev": "concurrently \"npm run back\" \"npm run client\""
+    "dev": "concurrently \"npm run back\" \"npm run client\"" ,
+    "start": "node server.js"
+    
   },
   "keywords": [],
   "author": "",

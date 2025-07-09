@@ -7,7 +7,7 @@ export const getAllOrders = createAsyncThunk(
   "order/getAllOrders",
   async (_, { rejectWithValue }) => {
     try {
-      const res = await axios.get("http://localhost:5800/order");
+      const res = await axios.get("https://ennajah-lib.onrender.com/order");
       return res.data.orders;
     } catch (error) {
       return rejectWithValue(error.response.data.message || error.message);
@@ -20,7 +20,7 @@ export const getOrdersByUser = createAsyncThunk(
   "order/getOrdersByUser",
   async (userId, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`http://localhost:5800/order/user/${userId}`);
+      const res = await axios.get(`https://ennajah-lib.onrender.com/order/user/${userId}`);
       return res.data.orders;
     } catch (error) {
       return rejectWithValue(error.response.data.message || error.message);
@@ -33,7 +33,7 @@ export const getOrderById = createAsyncThunk(
   "order/getOrderById",
   async (orderId, { rejectWithValue }) => {
     try {
-      const res = await axios.get(`http://localhost:5800/order/${orderId}`);
+      const res = await axios.get(`https://ennajah-lib.onrender.com/order/${orderId}`);
       return res.data.order;
     } catch (error) {
       return rejectWithValue(error.response.data.message || error.message);
@@ -46,7 +46,7 @@ export const createOrder = createAsyncThunk(
   "order/createOrder",
   async (orderData, { rejectWithValue }) => {
     try {
-      const res = await axios.post("http://localhost:5800/order/add", orderData);
+      const res = await axios.post("https://ennajah-lib.onrender.com/order/add", orderData);
       return res.data.order;
     } catch (error) {
       console.error("Erreur détaillée:", error.response?.data || error.message);
@@ -61,7 +61,7 @@ export const updateOrder = createAsyncThunk(
   async ({ orderId, updateData }, { rejectWithValue }) => {
     try {
       const res = await axios.put(
-        `http://localhost:5800/api/orders/${orderId}`,
+        `https://ennajah-lib.onrender.com/api/orders/${orderId}`,
         updateData
       );
       return res.data.updatedOrder;
@@ -76,7 +76,7 @@ export const deleteOrder = createAsyncThunk(
   "order/deleteOrder",
   async (orderId, { rejectWithValue }) => {
     try {
-      await axios.delete(`http://localhost:5800/api/orders/${orderId}`);
+      await axios.delete(`https://ennajah-lib.onrender.com/api/orders/${orderId}`);
       return orderId;
     } catch (error) {
       return rejectWithValue(error.response.data.message || error.message);

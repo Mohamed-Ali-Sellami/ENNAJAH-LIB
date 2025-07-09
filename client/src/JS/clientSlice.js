@@ -4,7 +4,7 @@ import axios from "axios";
 // ---------------- GET Clients -------------------
 export const getclient = createAsyncThunk("client/getclient", async (_, { rejectWithValue }) => {
   try {
-    const response = await axios.get("http://localhost:5800/user/all");
+    const response = await axios.get("https://ennajah-lib.onrender.com/user/all");
     return response.data.user; // Assuming "user" contains the list of clients
   } catch (error) {
     console.error(error);
@@ -15,7 +15,7 @@ export const getclient = createAsyncThunk("client/getclient", async (_, { reject
 // ---------------- DELETE Client -------------------
 export const deleteclient = createAsyncThunk("client/deleteclient", async (id, { rejectWithValue }) => {
   try {
-    await axios.delete(`http://localhost:5800/user/${id}`);
+    await axios.delete(`https://ennajah-lib.onrender.com/user/${id}`);
     return id; // Return deleted user ID to update state
   } catch (error) {
     console.error(error);

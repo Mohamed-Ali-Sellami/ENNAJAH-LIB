@@ -1,0 +1,5 @@
+# Ignorer les dépendances backend
+api/node_modules/
+
+# Ignorer les fichiers sensibles backend
+api/.env
